@@ -68,7 +68,7 @@
     <li class="nav-item">
       <div class="d-flex sidebar-profile">
         <div class="sidebar-profile-image">
-          <img src="images/faces/face29.png" alt="profile image">
+          <img src="../images/faces/face29.png" alt="profile image">
           <span class="sidebar-status-indicator"></span>
         </div>
         <div class="sidebar-profile-name">
@@ -93,13 +93,13 @@
       <p class="sidebar-menu-title">Dashboard</p>
     </li>
     <li class="nav-item">
-      <a class="nav-link" href="index.html">
+      <a class="nav-link" href="../views/dashboard.php">
         <i class="typcn typcn-device-desktop menu-icon"></i>
         <span class="menu-title">Overview</span>
       </a>
     </li>
     <li class="nav-item">
-      <a class="nav-link" href="calendar.html">
+      <a class="nav-link" href="../views/calendar.php ">
         <i class="typcn typcn-calendar menu-icon"></i>
         <span class="menu-title">Calendar View</span>
       </a>
