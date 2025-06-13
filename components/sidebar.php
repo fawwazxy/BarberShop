@@ -58,6 +58,11 @@
     transform: rotate(90deg);
 }
     </style>
+
+    <?php
+require_once "../global/session_check.php";
+$user = getAuthInfo($_SESSION['staff_id']);
+?>
  
  
  <!-- partial -->
@@ -72,7 +77,7 @@
           <span class="sidebar-status-indicator"></span>
         </div>
         <div class="sidebar-profile-name">
-          <p class="sidebar-name">Kenneth Osborne</p>
+          <p class="sidebar-name"><?php echo htmlspecialchars($user -> staff_name) ?></p>
           <p class="sidebar-designation">Staff</p>
         </div>
       </div>
@@ -197,20 +202,15 @@
 
     <!-- Reports & Settings -->
     <li class="nav-item">
-      <p class="sidebar-menu-title">System</p>
+      <p class="sidebar-menu-title">Review</p>
     </li>
     <li class="nav-item">
-      <a class="nav-link" href="reports.html">
+      <a class="nav-link" href="Feedback.php">
         <i class="typcn typcn-document-text menu-icon"></i>
-        <span class="menu-title">Reports</span>
+        <span class="menu-title">Feedback</span>
       </a>
     </li>
-    <li class="nav-item">
-      <a class="nav-link" href="settings.html">
-        <i class="typcn typcn-cog-outline menu-icon"></i>
-        <span class="menu-title">Settings</span>
-      </a>
-    </li>
+ 
   </ul>
 </nav>
 
