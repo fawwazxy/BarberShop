@@ -197,20 +197,15 @@
 
     <!-- Reports & Settings -->
     <li class="nav-item">
-      <p class="sidebar-menu-title">System</p>
+      <p class="sidebar-menu-title">Review</p>
     </li>
     <li class="nav-item">
-      <a class="nav-link" href="reports.html">
+      <a class="nav-link" href="Feedback.php">
         <i class="typcn typcn-document-text menu-icon"></i>
-        <span class="menu-title">Reports</span>
+        <span class="menu-title">Feedback</span>
       </a>
     </li>
-    <li class="nav-item">
-      <a class="nav-link" href="settings.html">
-        <i class="typcn typcn-cog-outline menu-icon"></i>
-        <span class="menu-title">Settings</span>
-      </a>
-    </li>
+ 
   </ul>
 </nav>
 
