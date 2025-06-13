@@ -4,50 +4,300 @@
     <!-- Required meta tags -->
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <title>Barbershop Appointments</title>
+    <title>Customer Directory</title>
     <!-- base:css -->
     <link rel="stylesheet" href="../vendors/typicons.font/font/typicons.css">
     <link rel="stylesheet" href="../vendors/css/vendor.bundle.base.css">
     <!-- endinject --> 
     <!-- plugin css for this page -->
-    <link rel="stylesheet" href="../vendors/datatables.net-bs4/dataTables.bootstrap4.css">
+    <link rel="stylesheet" href="../vendors/bootstrap-datepicker/bootstrap-datepicker.min.css">
+    <!-- DataTables CSS -->
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.11.5/css/jquery.dataTables.css">
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/buttons/2.2.2/css/buttons.dataTables.min.css">
     <!-- End plugin css for this page -->
     <!-- inject:css -->
     <link rel="stylesheet" href="../css/vertical-layout-light/style.css">
     <!-- endinject -->
     <link rel="shortcut icon" href="../images/favicon.png" />
     <style>
-      .dataTables_wrapper {
-        padding-top: 10px;
+      /* Improved Typography */
+      body {
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        color: #333;
       }
-      .appointment-status {
-        display: inline-block;
-        padding: 3px 8px;
-        border-radius: 12px;
-        font-size: 0.75em;
+      
+      h3 {
         font-weight: 600;
+        color: #2c3e50;
       }
-      .status-confirmed {
-        background-color: #d4edda;
-        color: #155724;
+      
+      /* Card Styling */
+      .card {
+        border: none;
+        border-radius: 10px;
+        box-shadow: 0 2px 15px rgba(0,0,0,0.05);
       }
-      .status-pending {
-        background-color: #fff3cd;
-        color: #856404;
+      
+      /* Table Improvements */
+      .customer-table {
+        margin-top: 20px;
+        border-collapse: separate;
+        border-spacing: 0;
+        border-radius: 10px;
+        overflow: hidden;
+        box-shadow: 0 2px 15px rgba(0,0,0,0.05);
       }
-      .status-completed {
-        background-color: #d1ecf1;
-        color: #0c5460;
-      }
-      .service-badge {
-        display: inline-block;
-        padding: 3px 8px;
-        border-radius: 12px;
-        font-size: 0.75em;
-        font-weight: 600;
-        margin-right: 5px;
+      
+      .customer-table thead th {
         background-color: #4B49AC;
         color: white;
+        font-weight: 500;
+        border: none;
+        padding: 12px 16px;
+        font-size: 0.9rem;
+      }
+      
+      .customer-table tbody tr {
+        transition: all 0.2s ease;
+      }
+      
+      .customer-table tbody tr:hover {
+        background-color: #f8f9fa;
+      }
+      
+      .customer-table tbody td {
+        padding: 12px 16px;
+        vertical-align: middle;
+        border-top: 1px solid #f1f1f1;
+        font-size: 0.9rem;
+      }
+      
+      /* Cell Styling */
+      .phone-cell {
+        font-weight: 500;
+        color: #4B49AC;
+      }
+      
+      .email-cell {
+        max-width: 200px;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+      }
+      
+      /* Action Buttons */
+      .action-buttons .btn {
+        padding: 5px 8px;
+        font-size: 13px;
+        margin-right: 4px;
+        border-radius: 4px;
+        box-shadow: none;
+        transition: all 0.2s;
+      }
+      
+      .btn-view {
+        background-color: #4B49AC;
+        color: white;
+        border: none;
+      }
+      
+      .btn-view:hover {
+        background-color: #3a3894;
+        transform: translateY(-1px);
+      }
+      
+      .btn-edit {
+        background-color: #FFC100;
+        color: #212529;
+        border: none;
+      }
+      
+      .btn-edit:hover {
+        background-color: #e0a800;
+        transform: translateY(-1px);
+      }
+      
+      .btn-delete {
+        background-color: #FD7E14;
+        color: white;
+        border: none;
+      }
+      
+      .btn-delete:hover {
+        background-color: #e06c0c;
+        transform: translateY(-1px);
+      }
+      
+      /* Status Badges */
+      .badge-status {
+        padding: 4px 8px;
+        border-radius: 12px;
+        font-size: 11px;
+        font-weight: 500;
+        letter-spacing: 0.3px;
+      }
+      
+      .badge-active {
+        background-color: #e6f7ee;
+        color: #28a745;
+        border: 1px solid #c3e6cb;
+      }
+      
+      .badge-inactive {
+        background-color: #f8f9fa;
+        color: #6c757d;
+        border: 1px solid #e9ecef;
+      }
+      
+      .badge-completed {
+        background-color: #e6f7f9;
+        color: #17a2b8;
+        border: 1px solid #bee5eb;
+      }
+      
+      .badge-pending {
+        background-color: #fff8e6;
+        color: #d39e00;
+        border: 1px solid #ffeeba;
+      }
+      
+      /* Customer Avatar */
+      .customer-avatar {
+        width: 36px;
+        height: 36px;
+        border-radius: 50%;
+        object-fit: cover;
+        margin-right: 10px;
+        border: 2px solid #f1f1f1;
+      }
+      
+      .customer-name {
+        display: flex;
+        align-items: center;
+        font-weight: 500;
+      }
+      
+      /* Price Cell */
+      .price-cell {
+        font-weight: 600;
+        color: #28a745;
+      }
+      
+      /* Modal Improvements */
+      .modal-content {
+        border: none;
+        border-radius: 10px;
+        box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+      }
+      
+      .modal-header {
+        border-bottom: 1px solid #f1f1f1;
+        padding: 16px 20px;
+      }
+      
+      .modal-title {
+        font-weight: 600;
+        color: #2c3e50;
+      }
+      
+      .modal-body {
+        padding: 20px;
+      }
+      
+      .modal-footer {
+        border-top: 1px solid #f1f1f1;
+        padding: 16px 20px;
+      }
+      
+      /* Stats in View Modal */
+      .customer-stats {
+        background: #f9f9f9;
+        border-radius: 8px;
+        padding: 15px;
+        margin-top: 15px;
+      }
+      
+      .stat-item {
+        text-align: center;
+        padding: 0 10px;
+      }
+      
+      .stat-item h5 {
+        font-weight: 600;
+        margin-bottom: 5px;
+      }
+      
+      .stat-item p {
+        font-size: 12px;
+        color: #6c757d;
+        margin-bottom: 0;
+      }
+      
+      /* Tab Navigation */
+      .nav-tabs {
+        border-bottom: 1px solid #f1f1f1;
+      }
+      
+      .nav-tabs .nav-link {
+        border: none;
+        color: #6c757d;
+        font-weight: 500;
+        padding: 10px 15px;
+      }
+      
+      .nav-tabs .nav-link.active {
+        color: #4B49AC;
+        border-bottom: 2px solid #4B49AC;
+        background: transparent;
+      }
+      
+      /* Form Controls */
+      .form-control {
+        border: 1px solid #e9ecef;
+        border-radius: 6px;
+        padding: 8px 12px;
+        font-size: 14px;
+      }
+      
+      /* Alert */
+      .alert-warning {
+        background-color: #fff8e6;
+        border-color: #ffeeba;
+        color: #856404;
+      }
+      
+      /* Button Improvements */
+      .btn {
+        font-weight: 500;
+        padding: 8px 16px;
+        border-radius: 6px;
+        transition: all 0.2s;
+      }
+      
+      .btn-primary {
+        background-color: #4B49AC;
+        border-color: #4B49AC;
+      }
+      
+      .btn-primary:hover {
+        background-color: #3a3894;
+        border-color: #3a3894;
+        transform: translateY(-1px);
+      }
+      
+      /* Responsive Adjustments */
+      @media (max-width: 768px) {
+        .customer-table thead th,
+        .customer-table tbody td {
+          padding: 10px 12px;
+          font-size: 0.85rem;
+        }
+        
+        .action-buttons .btn {
+          padding: 4px 6px;
+          font-size: 12px;
+          margin-right: 3px;
+        }
       }
     </style>
   </head>
@@ -66,17 +316,12 @@
           <ul class="navbar-nav mr-lg-2">
             <li class="nav-item  d-none d-lg-flex">
               <a class="nav-link" href="#">
-                <i class="typcn typcn-calendar mr-1"></i> Calendar
+                <i class="typcn typcn-scissors mr-1"></i> Services
               </a>
             </li>
             <li class="nav-item  d-none d-lg-flex">
               <a class="nav-link active" href="index.html">
-                <i class="typcn typcn-chart-bar-outline mr-1"></i> Dashboard
-              </a>
-            </li>
-            <li class="nav-item  d-none d-lg-flex">
-              <a class="nav-link" href="#">
-                <i class="typcn typcn-scissors mr-1"></i> Barbers
+                <i class="typcn typcn-user mr-1"></i> Customers
               </a>
             </li>
           </ul>
@@ -87,7 +332,7 @@
                 <span class="count bg-danger">3</span>
               </a>
               <div class="dropdown-menu dropdown-menu-right navbar-dropdown preview-list" aria-labelledby="notificationDropdown">
-                <p class="mb-0 font-weight-normal float-left dropdown-header">Appointment Alerts</p>
+                <p class="mb-0 font-weight-normal float-left dropdown-header">Notifications</p>
                 <a class="dropdown-item preview-item">
                   <div class="preview-thumbnail">
                     <div class="preview-icon bg-success">
@@ -95,20 +340,20 @@
                     </div>
                   </div>
                   <div class="preview-item-content">
-                    <h6 class="preview-subject font-weight-normal">New Appointment</h6>
+                    <h6 class="preview-subject font-weight-normal">New Customer</h6>
                     <p class="font-weight-light small-text mb-0">
-                      John Smith - 10:00 AM
+                      John Smith registered
                     </p>
                   </div>
                 </a>
                 <a class="dropdown-item preview-item">
                   <div class="preview-thumbnail">
                     <div class="preview-icon bg-warning">
-                      <i class="typcn typcn-time"></i>
+                      <i class="typcn typcn-calendar"></i>
                     </div>
                   </div>
                   <div class="preview-item-content">
-                    <h6 class="preview-subject font-weight-normal">Reminder</h6>
+                    <h6 class="preview-subject font-weight-normal">Appointment</h6>
                     <p class="font-weight-light small-text mb-0">
                       Mike Johnson - 11:30 AM
                     </p>
@@ -119,7 +364,7 @@
             <li class="nav-item nav-profile dropdown">
               <a class="nav-link dropdown-toggle pl-0 pr-0" href="#" data-toggle="dropdown" id="profileDropdown">
                 <i class="typcn typcn-user-outline mr-0"></i>
-                <span class="nav-profile-name">Barber Admin</span>
+                <span class="nav-profile-name">Admin</span>
               </a>
               <div class="dropdown-menu dropdown-menu-right navbar-dropdown" aria-labelledby="profileDropdown">
                 <a class="dropdown-item">
@@ -173,133 +418,121 @@
             <div class="row">
               <div class="col-md-12">
                 <div class="d-flex justify-content-between align-items-center mb-4">
-                  <h3 class="font-weight-bold mb-0">Appointments</h3>
+                  <h3 class="font-weight-bold mb-0">Customer Management</h3>
                   <div>
-                    <button id="newAppointmentBtn" class="btn btn-primary">
-                      <i class="typcn typcn-plus mr-1"></i> New Appointment
+                    <button id="newCustomerBtn" class="btn btn-primary">
+                      <i class="typcn typcn-plus mr-1"></i> Add New Customer
                     </button>
                   </div>
                 </div>
                 
                 <div class="card">
-                  <div class="card-body">
-                    <div class="calendar-controls d-flex flex-wrap align-items-center mb-4">
-                      <div class="barber-filter mr-3">
-                        <select id="barberFilter" class="form-control form-control-sm">
-                          <option value="">All Barbers</option>
-                          <option value="Tony Styles">Tony Styles</option>
-                          <option value="Mike Clipper">Mike Clipper</option>
-                          <option value="Eddie Razor">Eddie Razor</option>
-                          <option value="Carl Fade">Carl Fade</option>
-                        </select>
-                      </div>
-                      <div class="service-filter mr-3">
-                        <select id="serviceFilter" class="form-control form-control-sm">
-                          <option value="">All Services</option>
-                          <option value="Haircut">Haircut</option>
-                          <option value="Shave">Shave</option>
-                          <option value="Beard Trim">Beard Trim</option>
-                          <option value="Hair Color">Hair Color</option>
-                        </select>
-                      </div>
-                      <div class="status-filter">
-                        <select id="statusFilter" class="form-control form-control-sm">
-                          <option value="">All Statuses</option>
-                          <option value="confirmed">Confirmed</option>
-                          <option value="pending">Pending</option>
-                          <option value="completed">Completed</option>
-                        </select>
-                      </div>
-                    </div>
-                    
+                  <div class="card-body p-0">
                     <div class="table-responsive">
-                      <table id="appointmentsTable" class="table table-hover">
+                      <table id="customersTable" class="table customer-table">
                         <thead>
                           <tr>
+                            <th>No</th>
                             <th>Customer</th>
                             <th>Phone</th>
                             <th>Email</th>
-                            <th>Appointment Date</th>
-                            <th>Services</th>
-                            <th>Barber</th>
-                            <th>Total Price</th>
+                            <th>Last Appointment</th>
+                            <th>Total Spent</th>
                             <th>Status</th>
                             <th>Actions</th>
                           </tr>
                         </thead>
                         <tbody>
                           <tr>
-                            <td>John Smith</td>
-                            <td>(555) 123-4567</td>
-                            <td>john.smith@example.com</td>
-                            <td>2023-06-15 10:00 AM</td>
-                            <td><span class="service-badge">Haircut</span></td>
-                            <td>Tony Styles</td>
-                            <td>$30.00</td>
-                            <td><span class="appointment-status status-confirmed">Confirmed</span></td>
-                            <td>
-                              <button class="btn btn-sm btn-info">View</button>
-                              <button class="btn btn-sm btn-warning">Edit</button>
+                            <td>1</td>
+                            <td class="customer-name">
+                              <img src="https://randomuser.me/api/portraits/men/1.jpg" class="customer-avatar" alt="John Smith">
+                              <strong>John Smith</strong>
+                            </td>
+                            <td class="phone-cell">(555) 123-4567</td>
+                            <td class="email-cell">john.smith@example.com</td>
+                            <td>Jun 10, 2024<br><small>Haircut - RM30</small></td>
+                            <td class="price-cell">RM450.00</td>
+                            <td><span class="badge-status badge-active">Active</span></td>
+                            <td class="action-buttons">
+                              <button class="btn btn-view btn-sm" title="View">
+                                <i class="typcn typcn-eye"></i>
+                              </button>
+                              <button class="btn btn-edit btn-sm" title="Edit">
+                                <i class="typcn typcn-edit"></i>
+                              </button>
+                              <button class="btn btn-delete btn-sm" title="Delete">
+                                <i class="typcn typcn-trash"></i>
+                              </button>
                             </td>
                           </tr>
                           <tr>
-                            <td>Mike Johnson</td>
-                            <td>(555) 987-6543</td>
-                            <td>mike.johnson@example.com</td>
-                            <td>2023-06-15 11:30 AM</td>
-                            <td><span class="service-badge">Beard Trim</span></td>
-                            <td>Carl Fade</td>
-                            <td>$15.00</td>
-                            <td><span class="appointment-status status-confirmed">Confirmed</span></td>
-                            <td>
-                              <button class="btn btn-sm btn-info">View</button>
-                              <button class="btn btn-sm btn-warning">Edit</button>
+                            <td>2</td>
+                            <td class="customer-name">
+                              <img src="https://randomuser.me/api/portraits/men/2.jpg" class="customer-avatar" alt="Mike Johnson">
+                              <strong>Mike Johnson</strong>
+                            </td>
+                            <td class="phone-cell">(555) 987-6543</td>
+                            <td class="email-cell">mike.johnson@example.com</td>
+                            <td>Jun 8, 2024<br><small>Beard Trim - RM15</small></td>
+                            <td class="price-cell">RM180.00</td>
+                            <td><span class="badge-status badge-active">Active</span></td>
+                            <td class="action-buttons">
+                              <button class="btn btn-view btn-sm" title="View">
+                                <i class="typcn typcn-eye"></i>
+                              </button>
+                              <button class="btn btn-edit btn-sm" title="Edit">
+                                <i class="typcn typcn-edit"></i>
+                              </button>
+                              <button class="btn btn-delete btn-sm" title="Delete">
+                                <i class="typcn typcn-trash"></i>
+                              </button>
                             </td>
                           </tr>
                           <tr>
-                            <td>Robert Brown</td>
-                            <td>(555) 456-7890</td>
-                            <td>robert.brown@example.com</td>
-                            <td>2023-06-16 2:00 PM</td>
-                            <td>
-                              <span class="service-badge">Haircut</span>
-                              <span class="service-badge">Shave</span>
-                              <span class="service-badge">Facial</span>
+                            <td>3</td>
+                            <td class="customer-name">
+                              <img src="https://randomuser.me/api/portraits/men/3.jpg" class="customer-avatar" alt="Robert Brown">
+                              <strong>Robert Brown</strong>
                             </td>
-                            <td>Tony Styles</td>
-                            <td>$80.00</td>
-                            <td><span class="appointment-status status-pending">Pending</span></td>
-                            <td>
-                              <button class="btn btn-sm btn-info">View</button>
-                              <button class="btn btn-sm btn-warning">Edit</button>
-                            </td>
-                          </tr>
-                          <tr>
-                            <td>David Wilson</td>
-                            <td>(555) 789-0123</td>
-                            <td>david.wilson@example.com</td>
-                            <td>2023-06-17 9:00 AM</td>
-                            <td><span class="service-badge">Hair Color</span></td>
-                            <td>Eddie Razor</td>
-                            <td>$50.00</td>
-                            <td><span class="appointment-status status-completed">Completed</span></td>
-                            <td>
-                              <button class="btn btn-sm btn-info">View</button>
-                              <button class="btn btn-sm btn-warning">Edit</button>
+                            <td class="phone-cell">(555) 456-7890</td>
+                            <td class="email-cell">robert.brown@example.com</td>
+                            <td>May 28, 2024<br><small>Premium Package - RM80</small></td>
+                            <td class="price-cell">RM320.00</td>
+                            <td><span class="badge-status badge-inactive">Inactive</span></td>
+                            <td class="action-buttons">
+                              <button class="btn btn-view btn-sm" title="View">
+                                <i class="typcn typcn-eye"></i>
+                              </button>
+                              <button class="btn btn-edit btn-sm" title="Edit">
+                                <i class="typcn typcn-edit"></i>
+                              </button>
+                              <button class="btn btn-delete btn-sm" title="Delete">
+                                <i class="typcn typcn-trash"></i>
+                              </button>
                             </td>
                           </tr>
                           <tr>
-                            <td>James Davis</td>
-                            <td>(555) 234-5678</td>
-                            <td>james.davis@example.com</td>
-                            <td>2023-06-17 1:30 PM</td>
-                            <td><span class="service-badge">Haircut</span> <span class="service-badge">Beard Trim</span></td>
-                            <td>Mike Clipper</td>
-                            <td>$45.00</td>
-                            <td><span class="appointment-status status-confirmed">Confirmed</span></td>
-                            <td>
-                              <button class="btn btn-sm btn-info">View</button>
-                              <button class="btn btn-sm btn-warning">Edit</button>
+                            <td>4</td>
+                            <td class="customer-name">
+                              <img src="https://randomuser.me/api/portraits/women/1.jpg" class="customer-avatar" alt="Sarah Wilson">
+                              <strong>Sarah Wilson</strong>
+                            </td>
+                            <td class="phone-cell">(555) 789-0123</td>
+                            <td class="email-cell">sarah.wilson@example.com</td>
+                            <td>Jun 12, 2024<br><small>Hair Color - RM50</small></td>
+                            <td class="price-cell">RM200.00</td>
+                            <td><span class="badge-status badge-active">Active</span></td>
+                            <td class="action-buttons">
+                              <button class="btn btn-view btn-sm" title="View">
+                                <i class="typcn typcn-eye"></i>
+                              </button>
+                              <button class="btn btn-edit btn-sm" title="Edit">
+                                <i class="typcn typcn-edit"></i>
+                              </button>
+                              <button class="btn btn-delete btn-sm" title="Delete">
+                                <i class="typcn typcn-trash"></i>
+                              </button>
                             </td>
                           </tr>
                         </tbody>
@@ -311,204 +544,235 @@
             </div>
           </div>
           
-          <!-- Appointment Details Modal -->
-          <div class="modal fade" id="appointmentModal" tabindex="-1" role="dialog" aria-labelledby="appointmentModalLabel" aria-hidden="true">
-            <div class="modal-dialog" role="document">
+          <!-- View Customer Modal -->
+          <div class="modal fade" id="viewCustomerModal" tabindex="-1" role="dialog" aria-labelledby="viewCustomerModalLabel" aria-hidden="true">
+            <div class="modal-dialog modal-lg" role="document">
               <div class="modal-content">
                 <div class="modal-header">
-                  <h5 class="modal-title" id="appointmentModalLabel">Appointment Details</h5>
+                  <h5 class="modal-title" id="viewCustomerModalLabel">Customer Details</h5>
                   <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                   </button>
                 </div>
                 <div class="modal-body">
                   <div class="row">
-                    <div class="col-md-6">
-                      <div class="form-group">
-                        <label>Customer</label>
-                        <input type="text" class="form-control" id="customerName" readonly>
+                    <div class="col-md-4 text-center">
+                      <img src="https://randomuser.me/api/portraits/men/1.jpg" class="customer-avatar mb-3" style="width: 100px; height: 100px;" alt="Customer Avatar">
+                      <h4 class="mb-1">John Smith</h4>
+                      <span class="badge-status badge-active mb-3">Active</span>
+                      
+                      <div class="customer-stats">
+                        <div class="row">
+                          <div class="col-4 stat-item">
+                            <h5 class="font-weight-bold">15</h5>
+                            <p class="text-muted">Visits</p>
+                          </div>
+                          <div class="col-4 stat-item">
+                            <h5 class="font-weight-bold">RM450</h5>
+                            <p class="text-muted">Total</p>
+                          </div>
+                          <div class="col-4 stat-item">
+                            <h5 class="font-weight-bold">RM30</h5>
+                            <p class="text-muted">Avg/Visit</p>
+                          </div>
+                        </div>
                       </div>
                     </div>
-                    <div class="col-md-6">
-                      <div class="form-group">
-                        <label>Phone</label>
-                        <input type="text" class="form-control" id="customerPhone" readonly>
+                    <div class="col-md-8">
+                      <ul class="nav nav-tabs" id="customerTab" role="tablist">
+                        <li class="nav-item">
+                          <a class="nav-link active" id="details-tab" data-toggle="tab" href="#details" role="tab" aria-controls="details" aria-selected="true">Details</a>
+                        </li>
+                        <li class="nav-item">
+                          <a class="nav-link" id="history-tab" data-toggle="tab" href="#history" role="tab" aria-controls="history" aria-selected="false">Appointments</a>
+                        </li>
+                      </ul>
+                      
+                      <div class="tab-content pt-3" id="customerTabContent">
+                        <div class="tab-pane fade show active" id="details" role="tabpanel" aria-labelledby="details-tab">
+                          <div class="row">
+                            <div class="col-md-6">
+                              <div class="form-group">
+                                <label class="small text-muted mb-1">Phone Number</label>
+                                <div class="form-control-plaintext">(555) 123-4567</div>
+                              </div>
+                            </div>
+                            <div class="col-md-6">
+                              <div class="form-group">
+                                <label class="small text-muted mb-1">Email Address</label>
+                                <div class="form-control-plaintext">john.smith@example.com</div>
+                              </div>
+                            </div>
+                          </div>
+                          <div class="form-group">
+                            <label class="small text-muted mb-1">Customer Notes</label>
+                            <div class="card bg-light p-3">
+                              Regular customer, prefers haircut every 3 weeks. Likes clipper cut on sides.
+                            </div>
+                          </div>
+                        </div>
+                        
+                        <div class="tab-pane fade" id="history" role="tabpanel" aria-labelledby="history-tab">
+                          <div class="table-responsive">
+                            <table class="table table-sm">
+                              <thead>
+                                <tr>
+                                  <th>Date</th>
+                                  <th>Service</th>
+                                  <th>Barber</th>
+                                  <th>Amount</th>
+                                  <th>Status</th>
+                                </tr>
+                              </thead>
+                              <tbody>
+                                <tr>
+                                  <td>Jun 10, 2024</td>
+                                  <td>Haircut</td>
+                                  <td>Tony Styles</td>
+                                  <td>RM30.00</td>
+                                  <td><span class="badge-status badge-completed">Completed</span></td>
+                                </tr>
+                                <tr>
+                                  <td>May 27, 2024</td>
+                                  <td>Beard Trim</td>
+                                  <td>Carl Fade</td>
+                                  <td>RM15.00</td>
+                                  <td><span class="badge-status badge-completed">Completed</span></td>
+                                </tr>
+                                <tr>
+                                  <td>May 13, 2024</td>
+                                  <td>Haircut</td>
+                                  <td>Tony Styles</td>
+                                  <td>RM30.00</td>
+                                  <td><span class="badge-status badge-completed">Completed</span></td>
+                                </tr>
+                                <tr>
+                                  <td>Jun 15, 2024</td>
+                                  <td>Hair Color</td>
+                                  <td>Eddie Razor</td>
+                                  <td>RM50.00</td>
+                                  <td><span class="badge-status badge-pending">Pending</span></td>
+                                </tr>
+                              </tbody>
+                            </table>
+                          </div>
+                        </div>
                       </div>
                     </div>
-                  </div>
-                  <div class="row">
-                    <div class="col-md-6">
-                      <div class="form-group">
-                        <label>Email</label>
-                        <input type="text" class="form-control" id="customerEmail" readonly>
-                      </div>
-                    </div>
-                    <div class="col-md-6">
-                      <div class="form-group">
-                        <label>Date & Time</label>
-                        <input type="text" class="form-control" id="appointmentTime" readonly>
-                      </div>
-                    </div>
-                  </div>
-                  <div class="row">
-                    <div class="col-md-6">
-                      <div class="form-group">
-                        <label>Services</label>
-                        <input type="text" class="form-control" id="serviceType" readonly>
-                      </div>
-                    </div>
-                    <div class="col-md-6">
-                      <div class="form-group">
-                        <label>Barber</label>
-                        <input type="text" class="form-control" id="barberName" readonly>
-                      </div>
-                    </div>
-                  </div>
-                  <div class="row">
-                    <div class="col-md-6">
-                      <div class="form-group">
-                        <label>Total Price</label>
-                        <input type="text" class="form-control" id="totalPrice" readonly>
-                      </div>
-                    </div>
-                    <div class="col-md-6">
-                      <div class="form-group">
-                        <label>Status</label>
-                        <input type="text" class="form-control" id="appointmentStatus" readonly>
-                      </div>
-                    </div>
-                  </div>
-                  <div class="form-group">
-                    <label>Notes</label>
-                    <textarea class="form-control" id="appointmentNotes" rows="3" readonly></textarea>
                   </div>
                 </div>
                 <div class="modal-footer">
                   <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                  <button type="button" class="btn btn-primary">Edit</button>
-                  <button type="button" class="btn btn-danger">Cancel</button>
                 </div>
               </div>
             </div>
           </div>
           
-          <!-- New Appointment Modal -->
-          <div class="modal fade" id="newAppointmentModal" tabindex="-1" role="dialog" aria-labelledby="newAppointmentModalLabel" aria-hidden="true">
+          <!-- Add Customer Modal -->
+          <div class="modal fade" id="addCustomerModal" tabindex="-1" role="dialog" aria-labelledby="addCustomerModalLabel" aria-hidden="true">
             <div class="modal-dialog" role="document">
               <div class="modal-content">
                 <div class="modal-header">
-                  <h5 class="modal-title" id="newAppointmentModalLabel">New Appointment</h5>
+                  <h5 class="modal-title" id="addCustomerModalLabel">Add New Customer</h5>
                   <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                   </button>
                 </div>
                 <div class="modal-body">
-                  <form id="newAppointmentForm">
-                    <div class="row">
-                      <div class="col-md-6">
-                        <div class="form-group">
-                          <label>Customer</label>
-                          <select class="form-control" id="newCustomer">
-                            <option value="">Select Customer</option>
-                            <option value="john">John Smith</option>
-                            <option value="mike">Mike Johnson</option>
-                            <option value="david">David Wilson</option>
-                            <option value="robert">Robert Brown</option>
-                          </select>
-                        </div>
-                      </div>
-                      <div class="col-md-6">
-                        <div class="form-group">
-                          <label>Phone</label>
-                          <input type="text" class="form-control" id="newPhone" placeholder="Customer phone">
-                        </div>
-                      </div>
-                    </div>
-                    <div class="row">
-                      <div class="col-md-6">
-                        <div class="form-group">
-                          <label>Email</label>
-                          <input type="email" class="form-control" id="newEmail" placeholder="Customer email">
-                        </div>
-                      </div>
-                      <div class="col-md-6">
-                        <div class="form-group">
-                          <label>Service</label>
-                          <select class="form-control" id="newService">
-                            <option value="">Select Service</option>
-                            <option value="haircut">Haircut ($30)</option>
-                            <option value="shave">Shave ($20)</option>
-                            <option value="beard">Beard Trim ($15)</option>
-                            <option value="color">Hair Color ($50)</option>
-                            <option value="package">Premium Package ($80)</option>
-                          </select>
-                        </div>
-                      </div>
-                    </div>
-                    <div class="row">
-                      <div class="col-md-6">
-                        <div class="form-group">
-                          <label>Barber</label>
-                          <select class="form-control" id="newBarber">
-                            <option value="">Select Barber</option>
-                            <option value="tony">Tony Styles</option>
-                            <option value="mike">Mike Clipper</option>
-                            <option value="eddie">Eddie Razor</option>
-                            <option value="carl">Carl Fade</option>
-                          </select>
-                        </div>
-                      </div>
-                      <div class="col-md-6">
-                        <div class="form-group">
-                          <label>Status</label>
-                          <select class="form-control" id="newStatus">
-                            <option value="confirmed">Confirmed</option>
-                            <option value="pending">Pending</option>
-                          </select>
-                        </div>
-                      </div>
-                    </div>
-                    <div class="row">
-                      <div class="col-md-6">
-                        <div class="form-group">
-                          <label>Date</label>
-                          <input type="text" class="form-control datepicker" id="newDate" placeholder="Select date">
-                        </div>
-                      </div>
-                      <div class="col-md-6">
-                        <div class="form-group">
-                          <label>Time</label>
-                          <select class="form-control" id="newTime">
-                            <option value="09:00">9:00 AM</option>
-                            <option value="09:30">9:30 AM</option>
-                            <option value="10:00">10:00 AM</option>
-                            <option value="10:30">10:30 AM</option>
-                            <option value="11:00">11:00 AM</option>
-                            <option value="11:30">11:30 AM</option>
-                            <option value="12:00">12:00 PM</option>
-                            <option value="12:30">12:30 PM</option>
-                            <option value="13:00">1:00 PM</option>
-                            <option value="13:30">1:30 PM</option>
-                            <option value="14:00">2:00 PM</option>
-                            <option value="14:30">2:30 PM</option>
-                            <option value="15:00">3:00 PM</option>
-                            <option value="15:30">3:30 PM</option>
-                            <option value="16:00">4:00 PM</option>
-                            <option value="16:30">4:30 PM</option>
-                            <option value="17:00">5:00 PM</option>
-                          </select>
-                        </div>
-                      </div>
+                  <form id="addCustomerForm">
+                    <div class="form-group">
+                      <label>Full Name</label>
+                      <input type="text" class="form-control" id="customerName" placeholder="Enter customer name">
                     </div>
                     <div class="form-group">
-                      <label>Notes</label>
-                      <textarea class="form-control" id="newNotes" rows="3"></textarea>
+                      <label>Phone Number</label>
+                      <input type="tel" class="form-control" id="customerPhone" placeholder="Enter phone number">
+                    </div>
+                    <div class="form-group">
+                      <label>Email Address</label>
+                      <input type="email" class="form-control" id="customerEmail" placeholder="Enter email address">
+                    </div>
+                    <div class="form-group">
+                      <label>Status</label>
+                      <select class="form-control" id="customerStatus">
+                        <option value="active">Active</option>
+                        <option value="inactive">Inactive</option>
+                      </select>
                     </div>
                   </form>
                 </div>
                 <div class="modal-footer">
-                  <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
-                  <button type="button" class="btn btn-primary" id="saveAppointmentBtn">Save Appointment</button>
+                  <button type="button" class="btn btn-outline-secondary" data-dismiss="modal">Cancel</button>
+                  <button type="button" class="btn btn-primary" id="saveCustomerBtn">Save Customer</button>
+                </div>
+              </div>
+            </div>
+          </div>
+          
+          <!-- Edit Customer Modal -->
+          <div class="modal fade" id="editCustomerModal" tabindex="-1" role="dialog" aria-labelledby="editCustomerModalLabel" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h5 class="modal-title" id="editCustomerModalLabel">Edit Customer</h5>
+                  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                  </button>
+                </div>
+                <div class="modal-body">
+                  <form id="editCustomerForm">
+                    <div class="form-group">
+                      <label>Full Name</label>
+                      <input type="text" class="form-control" id="editCustomerName" value="John Smith">
+                    </div>
+                    <div class="form-group">
+                      <label>Phone Number</label>
+                      <input type="tel" class="form-control" id="editCustomerPhone" value="(555) 123-4567">
+                    </div>
+                    <div class="form-group">
+                      <label>Email Address</label>
+                      <input type="email" class="form-control" id="editCustomerEmail" value="john.smith@example.com">
+                    </div>
+                    <div class="form-group">
+                      <label>Status</label>
+                      <select class="form-control" id="editCustomerStatus">
+                        <option value="active" selected>Active</option>
+                        <option value="inactive">Inactive</option>
+                      </select>
+                    </div>
+                    <div class="form-group">
+                      <label>Notes</label>
+                      <textarea class="form-control" id="editCustomerNotes" rows="3">Regular customer, prefers haircut every 3 weeks. Likes clipper cut on sides.</textarea>
+                    </div>
+                  </form>
+                </div>
+                <div class="modal-footer">
+                  <button type="button" class="btn btn-outline-secondary" data-dismiss="modal">Cancel</button>
+                  <button type="button" class="btn btn-primary" id="updateCustomerBtn">Update Customer</button>
+                </div>
+              </div>
+            </div>
+          </div>
+          
+          <!-- Delete Confirmation Modal -->
+          <div class="modal fade" id="deleteCustomerModal" tabindex="-1" role="dialog" aria-labelledby="deleteCustomerModalLabel" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h5 class="modal-title" id="deleteCustomerModalLabel">Confirm Delete</h5>
+                  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                  </button>
+                </div>
+                <div class="modal-body">
+                  <p>Are you sure you want to delete <strong>John Smith</strong>? This action cannot be undone.</p>
+                  <div class="alert alert-warning mt-3">
+                    <i class="typcn typcn-warning mr-2"></i> This will permanently remove all customer data including appointment history.
+                  </div>
+                </div>
+                <div class="modal-footer">
+                  <button type="button" class="btn btn-outline-secondary" data-dismiss="modal">Cancel</button>
+                  <button type="button" class="btn btn-danger" id="confirmDeleteCustomerBtn">Delete Customer</button>
                 </div>
               </div>
             </div>
@@ -517,8 +781,8 @@
           <!-- partial:partials/_footer.html -->
           <footer class="footer">
             <div class="d-sm-flex justify-content-center justify-content-sm-between">
-              <span class="text-center text-sm-left d-block d-sm-inline-block">Copyright © 2023 Barbershop Admin. All rights reserved.</span>
-              <span class="float-none float-sm-right d-block mt-1 mt-sm-0 text-center">Handcrafted by <a href="#" target="_blank">Barbershop Team</a></span>
+              <span class="text-center text-sm-left d-block d-sm-inline-block">Copyright © 2023 BarberShop Admin. All rights reserved.</span>
+              <span class="float-none float-sm-right d-block mt-1 mt-sm-0 text-center">Handcrafted by <a href="#" target="_blank">Barber Team</a></span>
             </div>
           </footer>
           <!-- partial -->
@@ -532,9 +796,11 @@
     <script src="../vendors/js/vendor.bundle.base.js"></script>
     <!-- endinject -->
     <!-- Plugin js for this page-->
-    <script src="../vendors/datatables.net/jquery.dataTables.js"></script>
-    <script src="../vendors/datatables.net-bs4/dataTables.bootstrap4.js"></script>
     <script src="../vendors/bootstrap-datepicker/bootstrap-datepicker.min.js"></script>
+    <!-- DataTables JS -->
+    <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.11.5/js/jquery.dataTables.js"></script>
+    <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/buttons/2.2.2/js/dataTables.buttons.min.js"></script>
+    <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/buttons/2.2.2/js/buttons.print.min.js"></script>
     <!-- End plugin js for this page-->
     <!-- inject:js -->
     <script src="../js/off-canvas.js"></script>
@@ -546,95 +812,77 @@
     <!-- Custom js for this page-->
     <script>
       $(document).ready(function() {
-        // Initialize datepicker
-        $('.datepicker').datepicker({
-          format: 'yyyy-mm-dd',
-          todayHighlight: true,
-          autoclose: true
+        // Initialize DataTable
+        $('#customersTable').DataTable({
+          "order": [[4, "desc"]], // Sort by Last Visit column descending
+          "columnDefs": [
+            { "targets": [4], "type": "date" } // Proper sorting for date column
+          ],
+          dom: 'Bfrtip',
+          buttons: [
+            {
+              extend: 'print',
+              text: '<i class="typcn typcn-printer mr-1"></i> Print',
+              className: 'btn btn-outline-secondary btn-sm',
+              exportOptions: {
+                columns: [0, 1, 2, 3, 4, 5, 6]
+              }
+            }
+          ],
+          "language": {
+            "paginate": {
+              "previous": "<i class='typcn typcn-chevron-left'></i>",
+              "next": "<i class='typcn typcn-chevron-right'></i>"
+            }
+          }
         });
         
-        // Initialize DataTable
-        var table = $('#appointmentsTable').DataTable({
-          "order": [[3, "asc"]],
-          "responsive": true,
-          "initComplete": function() {
-            // Add filter event handlers
-            $('#barberFilter').on('change', function() {
-              table.column(5).search(this.value).draw();
-            });
-            
-            $('#serviceFilter').on('change', function() {
-              table.column(4).search(this.value).draw();
-            });
-            
-            $('#statusFilter').on('change', function() {
-              table.column(7).search(this.value).draw();
-            });
-          }
+        // Initialize history table
+        $('.history-table').DataTable({
+          "order": [[0, "desc"]],
+          "searching": false,
+          "paging": false,
+          "info": false
+        });
+        
+        // New customer button
+        $('#newCustomerBtn').click(function() {
+          $('#addCustomerModal').modal('show');
+        });
+        
+        // Save new customer
+        $('#saveCustomerBtn').click(function() {
+          $('#addCustomerModal').modal('hide');
+          $('#addCustomerForm')[0].reset();
+          alert('Customer added successfully!');
         });
         
         // View button click handler
-        $('#appointmentsTable tbody').on('click', 'button.btn-info', function() {
-          var data = table.row($(this).parents('tr')).data();
-          $('#customerName').val(data[0]);
-          $('#customerPhone').val(data[1]);
-          $('#customerEmail').val(data[2]);
-          $('#appointmentTime').val(data[3]);
-          $('#serviceType').val(data[4].replace(/<[^>]*>/g, '')); // Remove HTML tags
-          $('#barberName').val(data[5]);
-          $('#totalPrice').val(data[6]);
-          $('#appointmentStatus').val(data[7].replace(/<[^>]*>/g, '')); // Remove HTML tags
-          $('#appointmentNotes').val("Sample notes for " + data[0]);
-          $('#appointmentModal').modal('show');
+        $('.btn-view').click(function() {
+          $('#viewCustomerModal').modal('show');
         });
         
-        // New appointment button
-        $('#newAppointmentBtn').click(function() {
-          $('#newAppointmentModal').modal('show');
+        // Edit button click handler
+        $('.btn-edit').click(function() {
+          $('#editCustomerModal').modal('show');
         });
         
-        // Save new appointment
-        $('#saveAppointmentBtn').click(function() {
-          // Get form values
-          var customer = $('#newCustomer option:selected').text();
-          var phone = $('#newPhone').val();
-          var email = $('#newEmail').val();
-          var date = $('#newDate').val();
-          var time = $('#newTime option:selected').text();
-          var service = $('#newService option:selected').text().split(' (')[0];
-          var barber = $('#newBarber option:selected').text();
-          var status = $('#newStatus').val();
-          var price = getServicePrice($('#newService').val());
-          
-          // Add to table
-          table.row.add([
-            customer,
-            phone,
-            email,
-            date + ' ' + time,
-            '<span class="service-badge">' + service + '</span>',
-            barber,
-            price,
-            '<span class="appointment-status status-' + status + '">' + status.charAt(0).toUpperCase() + status.slice(1) + '</span>',
-            '<button class="btn btn-sm btn-info">View</button> <button class="btn btn-sm btn-warning">Edit</button>'
-          ]).draw();
-          
-          // Reset and close modal
-          $('#newAppointmentForm')[0].reset();
-          $('#newAppointmentModal').modal('hide');
+        // Delete button click handler
+        $('.btn-delete').click(function() {
+          $('#deleteCustomerModal').modal('show');
         });
         
-        // Helper function to get price based on service
-        function getServicePrice(service) {
-          switch(service) {
-            case 'haircut': return '$30.00';
-            case 'shave': return '$20.00';
-            case 'beard': return '$15.00';
-            case 'color': return '$50.00';
-            case 'package': return '$80.00';
-            default: return '$0.00';
-          }
-        }
+        // Update customer
+        $('#updateCustomerBtn').click(function() {
+          $('#editCustomerModal').modal('hide');
+          alert('Customer updated successfully!');
+        });
+        
+        // Confirm delete
+        $('#confirmDeleteCustomerBtn').click(function() {
+          $('#deleteCustomerModal').modal('hide');
+          alert('Customer deleted successfully!');
+        });
       });
     </script>
   </body>
