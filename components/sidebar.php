@@ -165,7 +165,7 @@
       </a>
       <div class="collapse" id="services">
         <ul class="nav flex-column sub-menu">
-          <li class="nav-item"><a class="nav-link" href="haircuts.html">Haircuts</a></li>
+          <li class="nav-item"><a class="nav-link" href="../views/services.php">Haircuts</a></li>
           <li class="nav-item"><a class="nav-link" href="coloring.html">Coloring</a></li>
           <li class="nav-item"><a class="nav-link" href="styling.html">Styling</a></li>
         </ul>
