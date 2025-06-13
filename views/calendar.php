@@ -1,3 +1,9 @@
+<?php
+session_start();
+require_once "../global/session_check.php";
+$user = getAuthInfo($_SESSION['staff_id']);
+?>
+
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -121,22 +127,9 @@
                 </a>
               </div>
             </li>
-            <li class="nav-item nav-profile dropdown">
-              <a class="nav-link dropdown-toggle pl-0 pr-0" href="#" data-toggle="dropdown" id="profileDropdown">
-                <i class="typcn typcn-user-outline mr-0"></i>
-                <span class="nav-profile-name">Barber Admin</span>
-              </a>
-              <div class="dropdown-menu dropdown-menu-right navbar-dropdown" aria-labelledby="profileDropdown">
-                <a class="dropdown-item">
-                  <i class="typcn typcn-cog text-primary"></i>
-                  Settings
-                </a>
-                <a class="dropdown-item">
-                  <i class="typcn typcn-power text-primary"></i>
-                  Logout
-                </a>
-              </div>
-            </li>
+            <?php
+            include "../global/navprofile.php"
+            ?>
           </ul>
           <button class="navbar-toggler navbar-toggler-right d-lg-none align-self-center" type="button" data-toggle="offcanvas">
             <span class="typcn typcn-th-menu"></span>

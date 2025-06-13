@@ -166,15 +166,15 @@
                 <p class="login-subtitle">Sign in to your staff account to continue</p>
             </div> 
             
-            <form>
+            <form action="../controller/login_exec.php" method="POST">
                 <div class="mb-3">
                     <label for="email" class="form-label">Username</label>
-                    <input type="email" class="form-control" id="email" placeholder="Enter your username">
+                    <input type="text" class="form-control" name="username" id="username" placeholder="Enter your username">
                 </div>
                 
                 <div class="mb-3">
                     <label for="password" class="form-label">Password</label>
-                    <input type="password" class="form-control" id="password" placeholder="Enter your password">
+                    <input type="password" class="form-control" name="password" id="password" placeholder="Enter your password">
                 </div>
                 
                 <div class="show-password">

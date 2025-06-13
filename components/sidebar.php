@@ -58,6 +58,11 @@
     transform: rotate(90deg);
 }
     </style>
+
+    <?php
+require_once "../global/session_check.php";
+$user = getAuthInfo($_SESSION['staff_id']);
+?>
  
  
  <!-- partial -->
@@ -72,7 +77,7 @@
           <span class="sidebar-status-indicator"></span>
         </div>
         <div class="sidebar-profile-name">
-          <p class="sidebar-name">Kenneth Osborne</p>
+          <p class="sidebar-name"><?php echo htmlspecialchars($user -> staff_name) ?></p>
           <p class="sidebar-designation">Staff</p>
         </div>
       </div>
