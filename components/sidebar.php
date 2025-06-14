@@ -117,10 +117,10 @@ $user = getAuthInfo($_SESSION['staff_id']);
     <li class="nav-item">
       <a class="nav-link" href="appointments.html">
         <i class="typcn typcn-time menu-icon"></i>
-        <span class="menu-title">All Appointments</span>
+        <span class="menu-title">Appointments</span>
       </a>
     </li>
-    <li class="nav-item">
+    <!-- <li class="nav-item">
       <a class="nav-link" data-toggle="collapse" href="#new-appointment" aria-expanded="false">
         <i class="typcn typcn-user-add menu-icon"></i>
         <span class="menu-title">New Booking</span>
@@ -133,7 +133,7 @@ $user = getAuthInfo($_SESSION['staff_id']);
           <li class="nav-item"><a class="nav-link" href="online-booking.html">Online Booking</a></li>
         </ul>
       </div>
-    </li>
+    </li> -->
     <li class="nav-item">
       <a class="nav-link" href="waiting-list.html">
         <i class="typcn typcn-group menu-icon"></i>
@@ -146,7 +146,7 @@ $user = getAuthInfo($_SESSION['staff_id']);
       <p class="sidebar-menu-title">Customers</p>
     </li>
     <li class="nav-item">
-      <a class="nav-link" href="customers.html">
+      <a class="nav-link" href="../views/customer.php">
         <i class="typcn typcn-group-outline menu-icon"></i>
         <span class="menu-title">Customer Directory</span>
       </a>
