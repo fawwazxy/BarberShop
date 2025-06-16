@@ -122,7 +122,7 @@
                             </div> 
                             <div class="service-cap">
                                 <h4><a href="#">Stylish Hair Cut</a></h4>
-                                <p>Sorem spsum dolor sit amsectetur adipisclit, seddo eiusmod tempor incididunt ut laborea.</p>
+                                <p>Get the Stylish fresh Cut You've Always Wanted at our Apitz barbershop   </p>
                             </div>
                         </div>
                     </div>
@@ -132,8 +132,8 @@
                                 <i class="flaticon-fitness"></i>
                             </div> 
                             <div class="service-cap">
-                                <h4><a href="#">Body Massege</a></h4>
-                                <p>Sorem spsum dolor sit amsectetur adipisclit, seddo eiusmod tempor incididunt ut laborea.</p>
+                                <h4><a href="#">Kids Haircuts</a></h4>
+                                <p>Stylish haircuts for the little ones in a comfortable, friendly environment</p>
                             </div>
                         </div>
                     </div> 
@@ -144,7 +144,7 @@
                             </div> 
                             <div class="service-cap">
                                 <h4><a href="#">Breard Style</a></h4>
-                                <p>Sorem spsum dolor sit amsectetur adipisclit, seddo eiusmod tempor incididunt ut laborea.</p>
+                                <p>Experience precision beard trimming and grooming for a perfectly polished look</p>
                             </div>
                         </div>
                     </div>
@@ -154,8 +154,8 @@
                                 <i class="flaticon-fitness"></i>
                             </div> 
                             <div class="service-cap">
-                                <h4><a href="#">Body Massege</a></h4>
-                                <p>Sorem spsum dolor sit amsectetur adipisclit, seddo eiusmod tempor incididunt ut laborea.</p>
+                                <h4><a href="#">Hair Color & Highlights</a></h4>
+                                <p>Transform your look with vibrant hair colors suite to your style.</p>
                             </div>
                         </div>
                     </div> 
@@ -165,8 +165,8 @@
                                 <i class="flaticon-clock"></i>
                             </div> 
                             <div class="service-cap">
-                                <h4><a href="#">Breard Style</a></h4>
-                                <p>Sorem spsum dolor sit amsectetur adipisclit, seddo eiusmod tempor incididunt ut laborea.</p>
+                                <h4><a href="#">Shaving Services</a></h4>
+                                <p>Enjoy a smooth and relaxing shave with our  techniques.</p>
                             </div>
                         </div>
                     </div>
@@ -176,8 +176,8 @@
                                 <i class="flaticon-healthcare-and-medical"></i>
                             </div> 
                             <div class="service-cap">
-                                <h4><a href="#">Stylish Hair Cut</a></h4>
-                                <p>Sorem spsum dolor sit amsectetur adipisclit, seddo eiusmod tempor incididunt ut laborea.</p>
+                                <h4><a href="#">Friendly & Professional Staff</a></h4>
+                                <p>Our skilled barbers are committed to providing top-notch service.</p>
                             </div>
                         </div>
                     </div>
@@ -186,105 +186,9 @@
         </section>
         <!-- Services Area End -->
     </main>
-    <footer>
-        <!--? Footer Start-->
-        <div class="footer-area section-bg" data-background="assets/img/gallery/footer_bg.png">
-            <div class="container">
-                <div class="footer-top footer-padding">
-                    <div class="row d-flex justify-content-between">
-                        <div class="col-xl-3 col-lg-4 col-md-5 col-sm-8">
-                            <div class="single-footer-caption mb-50">
-                                <!-- logo -->
-                                <div class="footer-logo">
-                                    <a href="index.html"><img src="assets/img/logo/logo2_footer.png" alt=""></a>
-                                </div>
-                                <div class="footer-tittle">
-                                    <div class="footer-pera">
-                                        <p class="info1">Receive updates and latest news direct from Simply enter.</p>
-                                    </div>
-                                </div>
-                                <div class="footer-number">
-                                    <h4><span>+564 </span>7885 3222</h4>
-                                    <p>youremail@gmail.com</p>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-xl-2 col-lg-2 col-md-3 col-sm-5">
-                            <div class="single-footer-caption mb-50">
-                                <div class="footer-tittle">
-                                    <h4>Location </h4>
-                                    <ul>
-                                        <li><a href="#">Advanced</a></li>
-                                        <li><a href="#"> Management</a></li>
-                                        <li><a href="#">Corporate</a></li>
-                                        <li><a href="#">Customer</a></li>
-                                        <li><a href="#">Information</a></li>
-                                    </ul>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-xl-2 col-lg-2 col-md-3 col-sm-5">
-                            <div class="single-footer-caption mb-50">
-                                <div class="footer-tittle">
-                                    <h4>Explore</h4>
-                                    <ul>
-                                        <li><a href="#">Cookies</a></li>
-                                        <li><a href="#">About</a></li>
-                                        <li><a href="#">Privacy Policy</a></li>
-                                        <li><a href="#">Proparties</a></li>
-                                        <li><a href="#">Licenses</a></li>
-                                    </ul>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-xl-4 col-lg-4 col-md-6 col-sm-8">
-                            <div class="single-footer-caption mb-50">
-                                <div class="footer-tittle">
-                                    <h4>Location</h4>
-                                    <div class="footer-pera">
-                                        <p class="info1">Subscribe now to get daily updates</p>
-                                    </div>
-                                </div>
-                                <!-- Form -->
-                                <div class="footer-form">
-                                    <div id="mc_embed_signup">
-                                        <form target="_blank" action="https://spondonit.us12.list-manage.com/subscribe/post?u=1462626880ade1ac87bd9c93a&amp;id=92a4423d01" method="get" class="subscribe_form relative mail_part" novalidate="true">
-                                            <input type="email" name="EMAIL" id="newsletter-form-email" placeholder=" Email Address " class="placeholder hide-on-focus" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Your email address'">
-                                            <div class="form-icon">
-                                                <button type="submit" name="submit" id="newsletter-submit" class="email_icon newsletter-submit button-contactForm">Send</button>
-                                            </div>
-                                            <div class="mt-10 info"></div>
-                                        </form>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="footer-bottom">
-                    <div class="row d-flex justify-content-between align-items-center">
-                        <div class="col-xl-9 col-lg-8">
-                            <div class="footer-copy-right">
-                                <p><!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
-  Copyright &copy;<script>document.write(new Date().getFullYear());</script> All rights reserved | This template is made with <i class="fa fa-heart" aria-hidden="true"></i> by <a href="https://colorlib.com" target="_blank">Colorlib</a>
-  <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. --></p>
-                            </div>
-                        </div>
-                        <div class="col-xl-3 col-lg-4">
-                            <!-- Footer Social -->
-                            <div class="footer-social f-right">
-                                <a href="#"><i class="fab fa-twitter"></i></a>
-                                <a href="https://www.facebook.com/sai4ull"><i class="fab fa-facebook-f"></i></a>
-                                <a href="#"><i class="fas fa-globe"></i></a>
-                                <a href="#"><i class="fab fa-instagram"></i></a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <!-- Footer End-->
-    </footer>
+<?php
+include "./footer.php"
+?>
     <!-- Scroll Up -->
     <div id="back-top" >
         <a title="Go to Top" href="#"> <i class="fas fa-level-up-alt"></i></a>
@@ -332,4 +236,6 @@
     <script src="./assets/js/main.js"></script>
     
     </body>
+
+    
 </html>
