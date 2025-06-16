@@ -115,7 +115,7 @@ $user = getAuthInfo($_SESSION['staff_id']);
       <p class="sidebar-menu-title">Appointments</p>
     </li>
     <li class="nav-item">
-      <a class="nav-link" href="appointments.html">
+      <a class="nav-link" href="appointments.php">
         <i class="typcn typcn-time menu-icon"></i>
         <span class="menu-title">Appointments</span>
       </a>
@@ -135,7 +135,7 @@ $user = getAuthInfo($_SESSION['staff_id']);
       </div>
     </li> -->
     <li class="nav-item">
-      <a class="nav-link" href="waiting-list.html">
+      <a class="nav-link" href="waitinglist.php">
         <i class="typcn typcn-group menu-icon"></i>
         <span class="menu-title">Waiting List</span>
       </a>
