@@ -1,6 +1,5 @@
- <style>
+<style>
     /* Fixed Sidebar CSS - Add this to your main CSS file */
-
 .sidebar.sidebar-offcanvas {
     position: fixed !important;
     top: 0;
@@ -57,16 +56,15 @@
 .nav-link[data-toggle="collapse"][aria-expanded="true"] .menu-arrow {
     transform: rotate(90deg);
 }
-    </style>
+</style>
 
-    <?php
+<?php
 require_once "../global/session_check.php";
 $user = getAuthInfo($_SESSION['staff_id']);
 ?>
  
- 
- <!-- partial -->
-        <!-- partial:partials/_sidebar.html -->
+<!-- partial -->
+<!-- partial:partials/_sidebar.html -->
 <nav class="sidebar sidebar-offcanvas" id="sidebar">
   <ul class="nav">
     <!-- User Profile Section -->
@@ -77,8 +75,8 @@ $user = getAuthInfo($_SESSION['staff_id']);
           <span class="sidebar-status-indicator"></span>
         </div>
         <div class="sidebar-profile-name">
-          <p class="sidebar-name"><?php echo htmlspecialchars($user -> staff_name) ?></p>
-          <p class="sidebar-designation">Staff</p>
+          <p class="sidebar-name"><?php echo htmlspecialchars($user->staff_name) ?></p>
+          <p class="sidebar-designation"><?php echo htmlspecialchars(ucfirst($user->role)) ?></p>
         </div>
       </div>
       <div class="nav-search">
@@ -103,47 +101,32 @@ $user = getAuthInfo($_SESSION['staff_id']);
         <span class="menu-title">Overview</span>
       </a>
     </li>
+    
+    <?php if ($user->role === 'admin'): ?>
+    <!-- Admin menu items -->
     <li class="nav-item">
-      <a class="nav-link" href="../views/calendar.php ">
-        <i class="typcn typcn-calendar menu-icon"></i>
-        <span class="menu-title">Calendar View</span>
-      </a>
-    </li>
-
-    <!-- Appointment Management -->
-    <li class="nav-item">
-      <p class="sidebar-menu-title">Appointments</p>
+      <p class="sidebar-menu-title">Management</p>
     </li>
     <li class="nav-item">
-      <a class="nav-link" href="appointments.php">
-        <i class="typcn typcn-time menu-icon"></i>
-        <span class="menu-title">Appointments</span>
+      <a class="nav-link" href="../views/staff_schedule.php">
+        <i class="typcn typcn-calendar-outline menu-icon"></i>
+        <span class="menu-title">Staff Schedules</span>
       </a>
     </li>
-    <!-- <li class="nav-item">
-      <a class="nav-link" data-toggle="collapse" href="#new-appointment" aria-expanded="false">
-        <i class="typcn typcn-user-add menu-icon"></i>
-        <span class="menu-title">New Booking</span>
-        <i class="typcn typcn-chevron-right menu-arrow"></i>
-      </a>
-      <div class="collapse" id="new-appointment">
-        <ul class="nav flex-column sub-menu">
-          <li class="nav-item"><a class="nav-link" href="walk-in.html">Walk-in</a></li>
-          <li class="nav-item"><a class="nav-link" href="phone-booking.html">Phone Booking</a></li>
-          <li class="nav-item"><a class="nav-link" href="online-booking.html">Online Booking</a></li>
-        </ul>
-      </div>
-    </li> -->
     <li class="nav-item">
-      <a class="nav-link" href="waitinglist.php">
-        <i class="typcn typcn-group menu-icon"></i>
-        <span class="menu-title">Waiting List</span>
+      <a class="nav-link" href="staff-performance.html">
+        <i class="typcn typcn-chart-line-outline menu-icon"></i>
+        <span class="menu-title">Staff Performance</span>
       </a>
     </li>
-
-    <!-- Customer Management -->
     <li class="nav-item">
-      <p class="sidebar-menu-title">Customers</p>
+      <p class="sidebar-menu-title">Review</p>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" href="Feedback.php">
+        <i class="typcn typcn-document-text menu-icon"></i>
+        <span class="menu-title">Feedback</span>
+      </a>
     </li>
     <li class="nav-item">
       <a class="nav-link" href="../views/customer.php">
@@ -151,21 +134,34 @@ $user = getAuthInfo($_SESSION['staff_id']);
         <span class="menu-title">Customer Directory</span>
       </a>
     </li>
+    
+    <?php else: ?>
+    <!-- Regular staff menu items -->
     <li class="nav-item">
-      <a class="nav-link" href="loyalty.html">
-        <i class="typcn typcn-star-outline menu-icon"></i>
-        <span class="menu-title">Loyalty Program</span>
+      <p class="sidebar-menu-title">My Work</p>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" href="../views/staff_schedule.php">
+        <i class="typcn typcn-calendar-outline menu-icon"></i>
+        <span class="menu-title">My Schedule</span>
       </a>
     </li>
-
-    <!-- Services & Products -->
     <li class="nav-item">
-      <p class="sidebar-menu-title">Services</p>
+      <a class="nav-link" href="appointments.php">
+        <i class="typcn typcn-time menu-icon"></i>
+        <span class="menu-title">My Appointments</span>
+      </a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" href="../views/myPerfomance.php">
+        <i class="typcn typcn-chart-line-outline menu-icon"></i>
+        <span class="menu-title">My Performance</span>
+      </a>
     </li>
     <li class="nav-item">
       <a class="nav-link" data-toggle="collapse" href="#services" aria-expanded="false">
         <i class="typcn typcn-scissors menu-icon"></i>
-        <span class="menu-title">Hair Services</span>
+        <span class="menu-title">My Services</span>
         <i class="typcn typcn-chevron-right menu-arrow"></i>
       </a>
       <div class="collapse" id="services">
@@ -176,41 +172,7 @@ $user = getAuthInfo($_SESSION['staff_id']);
         </ul>
       </div>
     </li>
-    <li class="nav-item">
-      <a class="nav-link" href="products.html">
-        <i class="typcn typcn-shopping-cart menu-icon"></i>
-        <span class="menu-title">Products</span>
-      </a>
-    </li>
-
-    <!-- Staff Management -->
-    <li class="nav-item">
-      <p class="sidebar-menu-title">Staff</p>
-    </li>
-    <li class="nav-item">
-      <a class="nav-link" href="staff-schedule.html">
-        <i class="typcn typcn-calendar-outline menu-icon"></i>
-        <span class="menu-title">Schedules</span>
-      </a>
-    </li>
-    <li class="nav-item">
-      <a class="nav-link" href="staff-performance.html">
-        <i class="typcn typcn-chart-line-outline menu-icon"></i>
-        <span class="menu-title">Performance</span>
-      </a>
-    </li>
-
-    <!-- Reports & Settings -->
-    <li class="nav-item">
-      <p class="sidebar-menu-title">Review</p>
-    </li>
-    <li class="nav-item">
-      <a class="nav-link" href="Feedback.php">
-        <i class="typcn typcn-document-text menu-icon"></i>
-        <span class="menu-title">Feedback</span>
-      </a>
-    </li>
- 
+    <?php endif; ?>
   </ul>
 </nav>
 
@@ -224,44 +186,4 @@ document.addEventListener('DOMContentLoaded', function() {
     currentActive.scrollIntoView({block: "center"});
   }
 });
-    </script>
-
-
-
-
-
-                  <!-- <div class="collapse" id="auth">
-              <ul class="nav flex-column sub-menu">
-                <li class="nav-item"> <a class="nav-link" href="pages/samples/login.html"> Login </a></li>
-                <li class="nav-item"> <a class="nav-link" href="pages/samples/register.html"> Register </a></li>
-              </ul>
-            </div>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" data-toggle="collapse" href="#error" aria-expanded="false" aria-controls="error">
-              <i class="typcn typcn-globe-outline menu-icon"></i>
-              <span class="menu-title">Error pages</span>
-              <i class="menu-arrow"></i>
-            </a>
-            <div class="collapse" id="error">
-              <ul class="nav flex-column sub-menu">
-                <li class="nav-item"> <a class="nav-link" href="pages/samples/error-404.html"> 404 </a></li>
-                <li class="nav-item"> <a class="nav-link" href="pages/samples/error-500.html"> 500 </a></li>
-              </ul>
-            </div>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="pages/documentation/documentation.html">
-              <i class="typcn typcn-document-text menu-icon"></i>
-              <span class="menu-title">Documentation</span>
-            </a>
-          </li>
-        </ul> -->
-        <!-- <ul class="sidebar-legend">
-          <li>
-            <p class="sidebar-menu-title">Category</p>
-          </li>
-          <li class="nav-item"><a href="#" class="nav-link">#Sales</a></li>
-          <li class="nav-item"><a href="#" class="nav-link">#Marketing</a></li>
-          <li class="nav-item"><a href="#" class="nav-link">#Growth</a></li>
-        </ul> -->
+</script>
