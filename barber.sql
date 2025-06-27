@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jun 16, 2025 at 05:16 PM
+-- Generation Time: Jun 27, 2025 at 05:22 PM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -125,15 +125,17 @@ CREATE TABLE `staff` (
   `staff_id` int(11) NOT NULL,
   `staff_name` varchar(99) NOT NULL,
   `username` varchar(100) NOT NULL,
-  `password` varchar(100) NOT NULL
+  `password` varchar(100) NOT NULL,
+  `role` varchar(100) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `staff`
 --
 
-INSERT INTO `staff` (`staff_id`, `staff_name`, `username`, `password`) VALUES
-(1, 'afiq', 'afiq04', '$2a$12$Tmx0/DhbolhdeOhSxQGPSeCyEf0g20Yj2x6ldgrhn3VsactPVej.m');
+INSERT INTO `staff` (`staff_id`, `staff_name`, `username`, `password`, `role`) VALUES
+(1, 'afiq', 'admin', '$2a$12$Tmx0/DhbolhdeOhSxQGPSeCyEf0g20Yj2x6ldgrhn3VsactPVej.m', 'admin'),
+(2, 'hai', 'fawwaz', '$2a$12$Tmx0/DhbolhdeOhSxQGPSeCyEf0g20Yj2x6ldgrhn3VsactPVej.m', 'staff');
 
 --
 -- Indexes for dumped tables
@@ -201,7 +203,7 @@ ALTER TABLE `staff`
 -- AUTO_INCREMENT for table `staff`
 --
 ALTER TABLE `staff`
-  MODIFY `staff_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `staff_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- Constraints for dumped tables
