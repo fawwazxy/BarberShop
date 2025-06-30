@@ -233,6 +233,29 @@ $user = getAuthInfo($_SESSION['staff_id']);
         transform: translateY(-1px);
       }
       
+      /* Filter and Add Button Container */
+      .filter-add-container {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        margin-bottom: 20px;
+      }
+      
+      .filter-container {
+        flex-grow: 1;
+        max-width: 200px;
+      }
+      
+      /* Customer Manual Input and Phone */
+      #appointmentCustomerManual, #editAppointmentCustomerManual, #appointmentPhone, #editAppointmentPhone {
+        display: none;
+        margin-top: 10px;
+      }
+      
+      #appointmentPhone.show, #editAppointmentPhone.show {
+        display: block;
+      }
+      
       /* Responsive Adjustments */
       @media (max-width: 768px) {
         .appointment-table thead th,
@@ -245,6 +268,20 @@ $user = getAuthInfo($_SESSION['staff_id']);
           padding: 4px 6px;
           font-size: 12px;
           margin-right: 3px;
+        }
+        
+        .filter-add-container {
+          flex-direction: column;
+          align-items: flex-start;
+        }
+        
+        .filter-container {
+          max-width: 100%;
+          width: 100%;
+        }
+        
+        #newAppointmentBtn {
+          width: 100%;
         }
       }
     </style>
@@ -290,7 +327,7 @@ $user = getAuthInfo($_SESSION['staff_id']);
                   <div class="preview-item-content">
                     <h6 class="preview-subject font-weight-normal">New Appointment</h6>
                     <p class="font-weight-light small-text mb-0">
-                      John Smith - 11:30 AM
+                      Ahmad bin Ismail - 11:30 AM
                     </p>
                   </div>
                 </a>
@@ -303,7 +340,7 @@ $user = getAuthInfo($_SESSION['staff_id']);
                   <div class="preview-item-content">
                     <h6 class="preview-subject font-weight-normal">Appointment Reminder</h6>
                     <p class="font-weight-light small-text mb-0">
-                      Mike Johnson - 2:00 PM
+                      Siti Nurhaliza - 2:00 PM
                     </p>
                   </div>
                 </a>
@@ -354,7 +391,16 @@ $user = getAuthInfo($_SESSION['staff_id']);
               <div class="col-md-12">
                 <div class="d-flex justify-content-between align-items-center mb-4">
                   <h3 class="font-weight-bold mb-0">Appointment Management</h3>
-                  <div>
+                  <div class="filter-add-container">
+                    <div class="filter-container">
+                      <select class="form-control" id="statusFilter">
+                        <option value="">All Status</option>
+                        <option value="confirmed">Confirmed</option>
+                        <option value="pending">Pending</option>
+                        <option value="completed">Completed</option>
+                        <option value="cancelled">Cancelled</option>
+                      </select>
+                    </div>
                     <button id="newAppointmentBtn" class="btn btn-primary">
                       <i class="typcn typcn-plus mr-1"></i> Add New Appointment
                     </button>
@@ -371,6 +417,7 @@ $user = getAuthInfo($_SESSION['staff_id']);
                             <th>Date</th>
                             <th>Time</th>
                             <th>Customer</th>
+                            <th>Phone</th>
                             <th>Barber</th>
                             <th>Service</th>
                             <th>Price</th>
@@ -379,11 +426,12 @@ $user = getAuthInfo($_SESSION['staff_id']);
                           </tr>
                         </thead>
                         <tbody>
-                          <tr>
+                          <tr data-id="1001">
                             <td>1001</td>
                             <td>Jun 15, 2024</td>
                             <td class="time-cell">10:00 AM</td>
-                            <td>John Smith</td>
+                            <td>Ahmad bin Ismail</td>
+                            <td>+6012-3456789</td>
                             <td>Tony Styles</td>
                             <td class="description-cell">Haircut and Beard Trim</td>
                             <td class="price-cell">RM45.00</td>
@@ -400,11 +448,12 @@ $user = getAuthInfo($_SESSION['staff_id']);
                               </button>
                             </td>
                           </tr>
-                          <tr>
+                          <tr data-id="1002">
                             <td>1002</td>
                             <td>Jun 15, 2024</td>
                             <td class="time-cell">11:30 AM</td>
-                            <td>Mike Johnson</td>
+                            <td>Siti Nurhaliza</td>
+                            <td>+6013-4567890</td>
                             <td>Carl Fade</td>
                             <td class="description-cell">Premium Haircut</td>
                             <td class="price-cell">RM35.00</td>
@@ -421,11 +470,12 @@ $user = getAuthInfo($_SESSION['staff_id']);
                               </button>
                             </td>
                           </tr>
-                          <tr>
+                          <tr data-id="1003">
                             <td>1003</td>
                             <td>Jun 14, 2024</td>
                             <td class="time-cell">2:00 PM</td>
-                            <td>Sarah Wilson</td>
+                            <td>Mohd Azlan</td>
+                            <td>+6017-5678901</td>
                             <td>Eddie Razor</td>
                             <td class="description-cell">Hair Color and Treatment</td>
                             <td class="price-cell">RM80.00</td>
@@ -442,11 +492,12 @@ $user = getAuthInfo($_SESSION['staff_id']);
                               </button>
                             </td>
                           </tr>
-                          <tr>
+                          <tr data-id="1004">
                             <td>1004</td>
                             <td>Jun 13, 2024</td>
                             <td class="time-cell">4:30 PM</td>
-                            <td>Robert Brown</td>
+                            <td>Nur Aisyah</td>
+                            <td>+6019-6789012</td>
                             <td>Tony Styles</td>
                             <td class="description-cell">Beard Trim and Shave</td>
                             <td class="price-cell">RM25.00</td>
@@ -479,7 +530,7 @@ $user = getAuthInfo($_SESSION['staff_id']);
                 <div class="modal-header">
                   <h5 class="modal-title" id="viewAppointmentModalLabel">Appointment Details</h5>
                   <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
+                    <span aria-hidden="true">×</span>
                   </button>
                 </div>
                 <div class="modal-body">
@@ -500,13 +551,13 @@ $user = getAuthInfo($_SESSION['staff_id']);
                             <div class="col-md-6">
                               <div class="form-group">
                                 <label class="small text-muted mb-1">Appointment ID</label>
-                                <div class="form-control-plaintext">1001</div>
+                                <div class="form-control-plaintext view-id"></div>
                               </div>
                             </div>
                             <div class="col-md-6">
                               <div class="form-group">
                                 <label class="small text-muted mb-1">Status</label>
-                                <div class="form-control-plaintext"><span class="badge-status badge-confirmed">Confirmed</span></div>
+                                <div class="form-control-plaintext"><span class="badge-status view-status"></span></div>
                               </div>
                             </div>
                           </div>
@@ -514,13 +565,13 @@ $user = getAuthInfo($_SESSION['staff_id']);
                             <div class="col-md-6">
                               <div class="form-group">
                                 <label class="small text-muted mb-1">Date</label>
-                                <div class="form-control-plaintext">Jun 15, 2024</div>
+                                <div class="form-control-plaintext view-date"></div>
                               </div>
                             </div>
                             <div class="col-md-6">
                               <div class="form-group">
                                 <label class="small text-muted mb-1">Time</label>
-                                <div class="form-control-plaintext">10:00 AM</div>
+                                <div class="form-control-plaintext view-time"></div>
                               </div>
                             </div>
                           </div>
@@ -528,33 +579,39 @@ $user = getAuthInfo($_SESSION['staff_id']);
                             <div class="col-md-6">
                               <div class="form-group">
                                 <label class="small text-muted mb-1">Customer</label>
-                                <div class="form-control-plaintext">John Smith</div>
+                                <div class="form-control-plaintext view-customer"></div>
                               </div>
                             </div>
                             <div class="col-md-6">
                               <div class="form-group">
-                                <label class="small text-muted mb-1">Barber</label>
-                                <div class="form-control-plaintext">Tony Styles</div>
+                                <label class="small text-muted mb-1">Phone</label>
+                                <div class="form-control-plaintext view-phone"></div>
                               </div>
-                            </div>
-                          </div>
-                          <div class="form-group">
-                            <label class="small text-muted mb-1">Service Description</label>
-                            <div class="card bg-light p-3">
-                              Haircut and Beard Trim - Customer requested a fade on the sides with about an inch off the top. Beard should be trimmed to 5mm length.
                             </div>
                           </div>
                           <div class="row">
                             <div class="col-md-6">
                               <div class="form-group">
+                                <label class="small text-muted mb-1">Barber</label>
+                                <div class="form-control-plaintext view-barber"></div>
+                              </div>
+                            </div>
+                          </div>
+                          <div class="form-group">
+                            <label class="small text-muted mb-1">Service Description</label>
+                            <div class="card bg-light p-3 view-description"></div>
+                          </div>
+                          <div class="row">
+                            <div class="col-md-6">
+                              <div class="form-group">
                                 <label class="small text-muted mb-1">Price</label>
-                                <div class="form-control-plaintext price-cell">RM45.00</div>
+                                <div class="form-control-plaintext price-cell view-price"></div>
                               </div>
                             </div>
                             <div class="col-md-6">
                               <div class="form-group">
                                 <label class="small text-muted mb-1">Duration</label>
-                                <div class="form-control-plaintext">45 minutes</div>
+                                <div class="form-control-plaintext view-duration"></div>
                               </div>
                             </div>
                           </div>
@@ -572,28 +629,7 @@ $user = getAuthInfo($_SESSION['staff_id']);
                                   <th>Status</th>
                                 </tr>
                               </thead>
-                              <tbody>
-                                <tr>
-                                  <td>Jun 10, 2024</td>
-                                  <td>Haircut</td>
-                                  <td>Tony Styles</td>
-                                  <td>RM30.00</td>
-                                  <td><span class="badge-status badge-completed">Completed</span></td>
-                                </tr>
-                                <tr>
-                                  <td>May 27, 2024</td>
-                                  <td>Beard Trim</td>
-                                  <td>Carl Fade</td>
-                                  <td>RM15.00</td>
-                                  <td><span class="badge-status badge-completed">Completed</span></td>
-                                </tr>
-                                <tr>
-                                  <td>May 13, 2024</td>
-                                  <td>Haircut</td>
-                                  <td>Tony Styles</td>
-                                  <td>RM30.00</td>
-                                  <td><span class="badge-status badge-completed">Completed</span></td>
-                                </tr>
+                              <tbody class="view-history">
                               </tbody>
                             </table>
                           </div>
@@ -616,7 +652,7 @@ $user = getAuthInfo($_SESSION['staff_id']);
                 <div class="modal-header">
                   <h5 class="modal-title" id="addAppointmentModalLabel">Add New Appointment</h5>
                   <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
+                    <span aria-hidden="true">×</span>
                   </button>
                 </div>
                 <div class="modal-body">
@@ -625,11 +661,17 @@ $user = getAuthInfo($_SESSION['staff_id']);
                       <label>Customer</label>
                       <select class="form-control" id="appointmentCustomer">
                         <option value="">Select Customer</option>
-                        <option value="1">John Smith</option>
-                        <option value="2">Mike Johnson</option>
-                        <option value="3">Sarah Wilson</option>
-                        <option value="4">Robert Brown</option>
+                        <option value="1">Ahmad bin Ismail</option>
+                        <option value="2">Siti Nurhaliza</option>
+                        <option value="3">Mohd Azlan</option>
+                        <option value="4">Nur Aisyah</option>
+                        <option value="other">Other</option>
                       </select>
+                      <input type="text" class="form-control" id="appointmentCustomerManual" placeholder="Enter new customer name">
+                    </div>
+                    <div class="form-group">
+                      <label>Phone</label>
+                      <input type="tel" class="form-control" id="appointmentPhone" placeholder="+6012-3456789">
                     </div>
                     <div class="form-group">
                       <label>Date</label>
@@ -680,49 +722,56 @@ $user = getAuthInfo($_SESSION['staff_id']);
                 <div class="modal-header">
                   <h5 class="modal-title" id="editAppointmentModalLabel">Edit Appointment</h5>
                   <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
+                    <span aria-hidden="true">×</span>
                   </button>
                 </div>
                 <div class="modal-body">
                   <form id="editAppointmentForm">
+                    <input type="hidden" id="editAppointmentId">
                     <div class="form-group">
                       <label>Customer</label>
                       <select class="form-control" id="editAppointmentCustomer">
-                        <option value="1" selected>John Smith</option>
-                        <option value="2">Mike Johnson</option>
-                        <option value="3">Sarah Wilson</option>
-                        <option value="4">Robert Brown</option>
+                        <option value="1">Ahmad bin Ismail</option>
+                        <option value="2">Siti Nurhaliza</option>
+                        <option value="3">Mohd Azlan</option>
+                        <option value="4">Nur Aisyah</option>
+                        <option value="other">Other</option>
                       </select>
+                      <input type="text" class="form-control" id="editAppointmentCustomerManual" placeholder="Enter new customer name">
+                    </div>
+                    <div class="form-group">
+                      <label>Phone</label>
+                      <input type="tel" class="form-control" id="editAppointmentPhone" placeholder="+6012-3456789">
                     </div>
                     <div class="form-group">
                       <label>Date</label>
-                      <input type="date" class="form-control" id="editAppointmentDate" value="2024-06-15">
+                      <input type="date" class="form-control" id="editAppointmentDate">
                     </div>
                     <div class="form-group">
                       <label>Time</label>
-                      <input type="time" class="form-control" id="editAppointmentTime" value="10:00">
+                      <input type="time" class="form-control" id="editAppointmentTime">
                     </div>
                     <div class="form-group">
                       <label>Barber</label>
                       <select class="form-control" id="editAppointmentBarber">
-                        <option value="1" selected>Tony Styles</option>
+                        <option value="1">Tony Styles</option>
                         <option value="2">Carl Fade</option>
                         <option value="3">Eddie Razor</option>
                       </select>
                     </div>
                     <div class="form-group">
                       <label>Service Description</label>
-                      <textarea class="form-control" id="editAppointmentDescription" rows="3">Haircut and Beard Trim</textarea>
+                      <textarea class="form-control" id="editAppointmentDescription" rows="3"></textarea>
                     </div>
                     <div class="form-group">
                       <label>Price (RM)</label>
-                      <input type="number" step="0.01" class="form-control" id="editAppointmentPrice" value="45.00">
+                      <input type="number" step="0.01" class="form-control" id="editAppointmentPrice">
                     </div>
                     <div class="form-group">
                       <label>Status</label>
                       <select class="form-control" id="editAppointmentStatus">
                         <option value="pending">Pending</option>
-                        <option value="confirmed" selected>Confirmed</option>
+                        <option value="confirmed">Confirmed</option>
                         <option value="completed">Completed</option>
                         <option value="cancelled">Cancelled</option>
                       </select>
@@ -744,11 +793,11 @@ $user = getAuthInfo($_SESSION['staff_id']);
                 <div class="modal-header">
                   <h5 class="modal-title" id="deleteAppointmentModalLabel">Confirm Delete</h5>
                   <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
+                    <span aria-hidden="true">×</span>
                   </button>
                 </div>
                 <div class="modal-body">
-                  <p>Are you sure you want to delete appointment <strong>#1001</strong> for <strong>John Smith</strong>? This action cannot be undone.</p>
+                  <p>Are you sure you want to delete appointment <strong class="delete-id"></strong> for <strong class="delete-customer"></strong>? This action cannot be undone.</p>
                   <div class="alert alert-warning mt-3">
                     <i class="typcn typcn-warning mr-2"></i> This will permanently remove the appointment record.
                   </div>
@@ -795,12 +844,72 @@ $user = getAuthInfo($_SESSION['staff_id']);
     <!-- Custom js for this page-->
     <script>
       $(document).ready(function() {
+        // Hardcoded appointment data
+        let appointments = [
+          {
+            id: '1001',
+            date: 'Jun 15, 2024',
+            time: '10:00 AM',
+            customer: 'Ahmad bin Ismail',
+            phone: '+6012-3456789',
+            barber: 'Tony Styles',
+            service: 'Haircut and Beard Trim',
+            price: 'RM45.00',
+            status: 'confirmed',
+            duration: '45 minutes',
+            history: [
+              { date: 'Jun 10, 2024', service: 'Haircut', barber: 'Tony Styles', amount: 'RM30.00', status: 'completed' },
+              { date: 'May 27, 2024', service: 'Beard Trim', barber: 'Carl Fade', amount: 'RM15.00', status: 'completed' },
+              { date: 'May 13, 2024', service: 'Haircut', barber: 'Tony Styles', amount: 'RM30.00', status: 'completed' }
+            ]
+          },
+          {
+            id: '1002',
+            date: 'Jun 15, 2024',
+            time: '11:30 AM',
+            customer: 'Siti Nurhaliza',
+            phone: '+6013-4567890',
+            barber: 'Carl Fade',
+            service: 'Premium Haircut',
+            price: 'RM35.00',
+            status: 'pending',
+            duration: '30 minutes',
+            history: []
+          },
+          {
+            id: '1003',
+            date: 'Jun 14, 2024',
+            time: '2:00 PM',
+            customer: 'Mohd Azlan',
+            phone: '+6017-5678901',
+            barber: 'Eddie Razor',
+            service: 'Hair Color and Treatment',
+            price: 'RM80.00',
+            status: 'completed',
+            duration: '60 minutes',
+            history: []
+          },
+          {
+            id: '1004',
+            date: 'Jun 13, 2024',
+            time: '4:30 PM',
+            customer: 'Nur Aisyah',
+            phone: '+6019-6789012',
+            barber: 'Tony Styles',
+            service: 'Beard Trim and Shave',
+            price: 'RM25.00',
+            status: 'cancelled',
+            duration: '20 minutes',
+            history: []
+          }
+        ];
+
         // Initialize DataTable
-        $('#appointmentsTable').DataTable({
-          "order": [[1, "desc"], [2, "asc"]], // Sort by Date descending, then Time ascending
+        let table = $('#appointmentsTable').DataTable({
+          "order": [[1, "desc"], [2, "asc"]],
           "columnDefs": [
-            { "targets": [1], "type": "date" }, // Proper sorting for date column
-            { "targets": [2], "type": "time" }  // Proper sorting for time column
+            { "targets": [1], "type": "date" },
+            { "targets": [2], "type": "time" }
           ],
           dom: 'Bfrtip',
           buttons: [
@@ -809,7 +918,7 @@ $user = getAuthInfo($_SESSION['staff_id']);
               text: '<i class="typcn typcn-printer mr-1"></i> Print',
               className: 'btn btn-outline-secondary btn-sm',
               exportOptions: {
-                columns: [0, 1, 2, 3, 4, 5, 6, 7]
+                columns: [0, 1, 2, 3, 4, 5, 6, 7, 8]
               }
             }
           ],
@@ -820,44 +929,283 @@ $user = getAuthInfo($_SESSION['staff_id']);
             }
           }
         });
-        
+
+        // Toggle manual customer input and phone input visibility
+        $('#appointmentCustomer').on('change', function() {
+          if ($(this).val() === 'other') {
+            $('#appointmentCustomerManual').show();
+            $('#appointmentPhone').addClass('show');
+          } else {
+            $('#appointmentCustomerManual').hide().val('');
+            $('#appointmentPhone').addClass('show');
+          }
+        });
+
+        $('#editAppointmentCustomer').on('change', function() {
+          if ($(this).val() === 'other') {
+            $('#editAppointmentCustomerManual').show();
+            $('#editAppointmentPhone').addClass('show');
+          } else {
+            $('#editAppointmentCustomerManual').hide().val('');
+            $('#editAppointmentPhone').addClass('show');
+          }
+        });
+
+        // Status filter
+        $('#statusFilter').on('change', function() {
+          table.column(8).search(this.value).draw();
+        });
+
         // New appointment button
         $('#newAppointmentBtn').click(function() {
-          // Set default date to today
           $('#appointmentDate').val(new Date().toISOString().substr(0, 10));
+          $('#appointmentCustomer').val('');
+          $('#appointmentCustomerManual').hide().val('');
+          $('#appointmentPhone').addClass('show').val('');
           $('#addAppointmentModal').modal('show');
         });
-        
+
         // Save new appointment
         $('#saveAppointmentBtn').click(function() {
+          // Convert date to MMM DD, YYYY format
+          const dateObj = new Date($('#appointmentDate').val());
+          const monthNames = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
+          const formattedDate = `${monthNames[dateObj.getMonth()]} ${dateObj.getDate()}, ${dateObj.getFullYear()}`;
+
+          // Convert time to HH:MM AM/PM format
+          let hours = parseInt($('#appointmentTime').val().split(':')[0]);
+          const minutes = $('#appointmentTime').val().split(':')[1];
+          const period = hours >= 12 ? 'PM' : 'AM';
+          if (hours > 12) hours -= 12;
+          if (hours === 0) hours = 12;
+          const formattedTime = `${hours}:${minutes} ${period}`;
+
+          // Determine customer name
+          let customerName = $('#appointmentCustomer').val() === 'other' ? $('#appointmentCustomerManual').val().trim() : $('#appointmentCustomer option:selected').text();
+          if ($('#appointmentCustomer').val() === '') customerName = '';
+
+          // Get phone number
+          const phone = $('#appointmentPhone').val().trim();
+          const phoneRegex = /^\+601[0-9]-[0-9]{7,8}$/;
+
+          const newId = (Math.max(...appointments.map(a => parseInt(a.id))) + 1).toString();
+          const newAppointment = {
+            id: newId,
+            date: formattedDate,
+            time: formattedTime,
+            customer: customerName,
+            phone: phone,
+            barber: $('#appointmentBarber option:selected').text(),
+            service: $('#appointmentDescription').val().trim(),
+            price: 'RM' + parseFloat($('#appointmentPrice').val()).toFixed(2),
+            status: $('#appointmentStatus').val(),
+            duration: '30 minutes', // Default duration
+            history: []
+          };
+
+          // Validation
+          if (!newAppointment.date || !newAppointment.time || !newAppointment.customer || !phone || !phoneRegex.test(phone) ||
+              !newAppointment.barber || !newAppointment.service || !newAppointment.price || isNaN(parseFloat($('#appointmentPrice').val()))) {
+            alert('Please fill in all required fields with valid data. Phone number must be in the format +601X-XXXXXXX.');
+            return;
+          }
+
+          appointments.push(newAppointment);
+
+          // Add row to DataTable with consistent action buttons
+          const newRow = $(`
+            <tr data-id="${newAppointment.id}">
+              <td>${newAppointment.id}</td>
+              <td>${newAppointment.date}</td>
+              <td class="time-cell">${newAppointment.time}</td>
+              <td>${newAppointment.customer}</td>
+              <td>${newAppointment.phone}</td>
+              <td>${newAppointment.barber}</td>
+              <td class="description-cell">${newAppointment.service}</td>
+              <td class="price-cell">${newAppointment.price}</td>
+              <td><span class="badge-status badge-${newAppointment.status}">${newAppointment.status.charAt(0).toUpperCase() + newAppointment.status.slice(1)}</span></td>
+              <td class="action-buttons">
+                <button class="btn btn-view btn-sm" title="View"><i class="typcn typcn-eye"></i></button>
+                <button class="btn btn-edit btn-sm" title="Edit"><i class="typcn typcn-edit"></i></button>
+                <button class="btn btn-delete btn-sm" title="Delete"><i class="typcn typcn-trash"></i></button>
+              </td>
+            </tr>
+          `);
+
+          table.row.add(newRow).draw();
+
           $('#addAppointmentModal').modal('hide');
           $('#addAppointmentForm')[0].reset();
+          $('#appointmentCustomerManual').hide();
+          $('#appointmentPhone').removeClass('show').val('');
           alert('Appointment added successfully!');
         });
-        
+
         // View button click handler
-        $('.btn-view').click(function() {
+        $(document).on('click', '.btn-view', function() {
+          const id = $(this).closest('tr').data('id').toString();
+          const appointment = appointments.find(a => a.id === id);
+          
+          $('.view-id').text(appointment.id);
+          $('.view-date').text(appointment.date);
+          $('.view-time').text(appointment.time);
+          $('.view-customer').text(appointment.customer);
+          $('.view-phone').text(appointment.phone);
+          $('.view-barber').text(appointment.barber);
+          $('.view-description').text(appointment.service);
+          $('.view-price').text(appointment.price);
+          $('.view-status').removeClass().addClass('badge-status').addClass(`badge-${appointment.status}`).text(appointment.status.charAt(0).toUpperCase() + appointment.status.slice(1));
+          $('.view-duration').text(appointment.duration);
+
+          $('.view-history').empty();
+          appointment.history.forEach(h => {
+            $('.view-history').append(`
+              <tr>
+                <td>${h.date}</td>
+                <td>${h.service}</td>
+                <td>${h.barber}</td>
+                <td>${h.amount}</td>
+                <td><span class="badge-status badge-${h.status}">${h.status.charAt(0).toUpperCase() + h.status.slice(1)}</span></td>
+              </tr>
+            `);
+          });
+
           $('#viewAppointmentModal').modal('show');
         });
-        
+
         // Edit button click handler
-        $('.btn-edit').click(function() {
+        $(document).on('click', '.btn-edit', function() {
+          const id = $(this).closest('tr').data('id').toString();
+          const appointment = appointments.find(a => a.id === id);
+
+          // Convert date to YYYY-MM-DD format
+          const dateParts = appointment.date.split(' ');
+          const months = {
+            'Jan': '01', 'Feb': '02', 'Mar': '03', 'Apr': '04',
+            'May': '05', 'Jun': '06', 'Jul': '07', 'Aug': '08',
+            'Sep': '09', 'Oct': '10', 'Nov': '11', 'Dec': '12'
+          };
+          const formattedDate = `${dateParts[2]}-${months[dateParts[0]]}-${dateParts[1].replace(',', '')}`;
+          
+          // Convert time to HH:MM format
+          const [time, period] = appointment.time.split(' ');
+          let [hours, minutes] = time.split(':');
+          hours = parseInt(hours);
+          if (period === 'PM' && hours !== 12) hours += 12;
+          if (period === 'AM' && hours === 12) hours = 0;
+          const formattedTime = `${hours.toString().padStart(2, '0')}:${minutes}`;
+
+          $('#editAppointmentId').val(appointment.id);
+          
+          // Check if customer is in dropdown options
+          const customerOption = [...$('#editAppointmentCustomer option')].find(opt => opt.text === appointment.customer);
+          if (customerOption) {
+            $('#editAppointmentCustomer').val(customerOption.value);
+            $('#editAppointmentCustomerManual').hide().val('');
+          } else {
+            $('#editAppointmentCustomer').val('other');
+            $('#editAppointmentCustomerManual').show().val(appointment.customer);
+          }
+          
+          $('#editAppointmentPhone').val(appointment.phone).addClass('show');
+          $('#editAppointmentDate').val(formattedDate);
+          $('#editAppointmentTime').val(formattedTime);
+          $('#editAppointmentBarber').val([...$('#editAppointmentBarber option')].find(opt => opt.text === appointment.barber)?.value);
+          $('#editAppointmentDescription').val(appointment.service);
+          $('#editAppointmentPrice').val(parseFloat(appointment.price.replace('RM', '')));
+          $('#editAppointmentStatus').val(appointment.status);
+
           $('#editAppointmentModal').modal('show');
         });
-        
-        // Delete button click handler
-        $('.btn-delete').click(function() {
-          $('#deleteAppointmentModal').modal('show');
-        });
-        
+
         // Update appointment
-        $('#updateAppointmentBtn').click(function() {
+        $(document).on('click', '#updateAppointmentBtn', function() {
+          const id = $('#editAppointmentId').val();
+          const index = appointments.findIndex(a => a.id === id);
+
+          // Determine customer name
+          let customerName = $('#editAppointmentCustomer').val() === 'other' ? $('#editAppointmentCustomerManual').val().trim() : $('#editAppointmentCustomer option:selected').text();
+          if ($('#editAppointmentCustomer').val() === '') customerName = '';
+
+          // Get phone number
+          const phone = $('#editAppointmentPhone').val().trim();
+          const phoneRegex = /^\+601[0-9]-[0-9]{7,8}$/;
+
+          // Validation
+          if (!$('#editAppointmentDate').val() || !$('#editAppointmentTime').val() || !customerName || !phone || !phoneRegex.test(phone) ||
+              !$('#editAppointmentBarber').val() || !$('#editAppointmentDescription').val().trim() || !$('#editAppointmentPrice').val() || isNaN(parseFloat($('#editAppointmentPrice').val()))) {
+            alert('Please fill in all required fields with valid data. Phone number must be in the format +601X-XXXXXXX.');
+            return;
+          }
+
+          // Convert date to MMM DD, YYYY format
+          const dateObj = new Date($('#editAppointmentDate').val());
+          const monthNames = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
+          const formattedDisplayDate = `${monthNames[dateObj.getMonth()]} ${dateObj.getDate()}, ${dateObj.getFullYear()}`;
+
+          // Convert time to HH:MM AM/PM format
+          let hours = parseInt($('#editAppointmentTime').val().split(':')[0]);
+          const minutes = $('#editAppointmentTime').val().split(':')[1];
+          const period = hours >= 12 ? 'PM' : 'AM';
+          if (hours > 12) hours -= 12;
+          if (hours === 0) hours = 12;
+          const formattedDisplayTime = `${hours}:${minutes} ${period}`;
+
+          appointments[index] = {
+            ...appointments[index],
+            date: formattedDisplayDate,
+            time: formattedDisplayTime,
+            customer: customerName,
+            phone: phone,
+            barber: $('#editAppointmentBarber option:selected').text(),
+            service: $('#editAppointmentDescription').val().trim(),
+            price: 'RM' + parseFloat($('#editAppointmentPrice').val()).toFixed(2),
+            status: $('#editAppointmentStatus').val()
+          };
+
+          const updatedRow = $(`
+            <tr data-id="${id}">
+              <td>${id}</td>
+              <td>${appointments[index].date}</td>
+              <td class="time-cell">${appointments[index].time}</td>
+              <td>${appointments[index].customer}</td>
+              <td>${appointments[index].phone}</td>
+              <td>${appointments[index].barber}</td>
+              <td class="description-cell">${appointments[index].service}</td>
+              <td class="price-cell">${appointments[index].price}</td>
+              <td><span class="badge-status badge-${appointments[index].status}">${appointments[index].status.charAt(0).toUpperCase() + appointments[index].status.slice(1)}</span></td>
+              <td class="action-buttons">
+                <button class="btn btn-view btn-sm" title="View"><i class="typcn typcn-eye"></i></button>
+                <button class="btn btn-edit btn-sm" title="Edit"><i class="typcn typcn-edit"></i></button>
+                <button class="btn btn-delete btn-sm" title="Delete"><i class="typcn typcn-trash"></i></button>
+              </td>
+            </tr>
+          `);
+
+          table.row($(`tr[data-id="${id}"]`)).data(updatedRow[0].cells).draw();
+
           $('#editAppointmentModal').modal('hide');
           alert('Appointment updated successfully!');
         });
-        
+
+        // Delete button click handler
+        $(document).on('click', '.btn-delete', function() {
+          const id = $(this).closest('tr').data('id').toString();
+          const appointment = appointments.find(a => a.id === id);
+          
+          $('.delete-id').text('#' + id);
+          $('.delete-customer').text(appointment.customer);
+          $('#confirmDeleteAppointmentBtn').data('id', id);
+          
+          $('#deleteAppointmentModal').modal('show');
+        });
+
         // Confirm delete
-        $('#confirmDeleteAppointmentBtn').click(function() {
+        $(document).on('click', '#confirmDeleteAppointmentBtn', function() {
+          const id = $(this).data('id');
+          appointments = appointments.filter(a => a.id !== id);
+          table.row($(`tr[data-id="${id}"]`)).remove().draw();
+          
           $('#deleteAppointmentModal').modal('hide');
           alert('Appointment deleted successfully!');
         });

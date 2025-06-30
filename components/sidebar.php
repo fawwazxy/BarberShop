@@ -101,6 +101,12 @@ $user = getAuthInfo($_SESSION['staff_id']);
         <span class="menu-title">Overview</span>
       </a>
     </li>
+        <li class="nav-item">
+      <a class="nav-link" href="../views/income.php">
+        <i class="typcn typcn-device-desktop menu-icon"></i>
+        <span class="menu-title">Income Statistics</span>
+      </a>
+    </li>
     
     <?php if ($user->role === 'admin'): ?>
     <!-- Admin menu items -->
@@ -108,13 +114,19 @@ $user = getAuthInfo($_SESSION['staff_id']);
       <p class="sidebar-menu-title">Management</p>
     </li>
     <li class="nav-item">
-      <a class="nav-link" href="../views/staff_schedule.php">
+      <a class="nav-link" href="../views/all_staffschedule.php">
         <i class="typcn typcn-calendar-outline menu-icon"></i>
         <span class="menu-title">Staff Schedules</span>
       </a>
     </li>
+        <li class="nav-item">
+      <a class="nav-link" href="appointments.php">
+        <i class="typcn typcn-chart-line-outline menu-icon"></i>
+        <span class="menu-title">Appointments</span>
+      </a>
+    </li>
     <li class="nav-item">
-      <a class="nav-link" href="staff-performance.html">
+      <a class="nav-link" href="perfomance.php">
         <i class="typcn typcn-chart-line-outline menu-icon"></i>
         <span class="menu-title">Staff Performance</span>
       </a>
@@ -147,7 +159,7 @@ $user = getAuthInfo($_SESSION['staff_id']);
       </a>
     </li>
     <li class="nav-item">
-      <a class="nav-link" href="appointments.php">
+      <a class="nav-link" href="myAppointment.php">
         <i class="typcn typcn-time menu-icon"></i>
         <span class="menu-title">My Appointments</span>
       </a>
