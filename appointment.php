@@ -10,6 +10,7 @@
     <link rel="shortcut icon" type="image/x-icon" href="assets/img/favicon.ico">
 
     <!-- CSS here -->
+     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
     <link rel="stylesheet" href="assets/css/bootstrap.min.css">
     <link rel="stylesheet" href="assets/css/owl.carousel.min.css">
     <link rel="stylesheet" href="assets/css/slicknav.css">
@@ -464,6 +465,86 @@ a, button {
             color: #6c757d;
         }
 
+        /* Payment Options */
+        .payment-options {
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            margin-bottom: 40px;
+            flex-wrap: wrap;
+        }
+
+        .payment-option {
+            width: 200px;
+            padding: 30px;
+            border: 2px solid #e5e5e5;
+            border-radius: 10px;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.3s;
+            background: #fff;
+        }
+
+        .payment-option:hover {
+            border-color: #c9a761;
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+        }
+
+        .payment-option.selected {
+            border-color: #c9a761;
+            background: #faf8f5;
+        }
+
+        .payment-option i {
+            font-size: 40px;
+            color: #c9a761;
+            margin-bottom: 20px;
+            display: block;
+        }
+
+        .payment-option h4 {
+            font-size: 18px;
+            margin-bottom: 10px;
+            color: #1a1a1a;
+        }
+
+        .payment-option p {
+            color: #666;
+            font-size: 14px;
+        }
+
+        .qr-code-container {
+            text-align: center;
+            margin-top: 30px;
+            display: none;
+        }
+
+        .qr-code-container img {
+            max-width: 200px;
+            margin-bottom: 20px;
+            border: 1px solid #e5e5e5;
+            padding: 10px;
+            background: #fff;
+        }
+
+        .payment-instructions {
+            background: #f8f9fa;
+            padding: 20px;
+            border-radius: 5px;
+            margin-top: 20px;
+            display: none;
+        }
+
+        .cash-instructions {
+            background: #f8f9fa;
+            padding: 20px;
+            border-radius: 5px;
+            margin-top: 20px;
+            text-align: center;
+            display: none;
+        }
+
         /* Animations */
         @keyframes fadeIn {
             from { opacity: 0; }
@@ -483,6 +564,11 @@ a, button {
 
             .time-slots {
                 grid-template-columns: repeat(2, 1fr);
+            }
+
+            .payment-options {
+                flex-direction: column;
+                align-items: center;
             }
         }
 
@@ -583,6 +669,10 @@ a, button {
                         </div>
                         <div class="progress-step" id="progressStep5">
                             <span>5</span>
+                            <div class="step-label">Payment</div>
+                        </div>
+                        <div class="progress-step" id="progressStep6">
+                            <span>6</span>
                             <div class="step-label">Confirm</div>
                         </div>
                     </div>
@@ -602,7 +692,7 @@ a, button {
                                         </div>
                                         <h4>Stylish Hair Cut</h4>
                                         <p>Professional hair cutting service with styling</p>
-                                        <span class="service-price">$25</span>
+                                        <span class="service-price">RM25</span>
                                         <span class="service-duration">30 min</span>
                                     </div>
                                 </div>
@@ -613,7 +703,7 @@ a, button {
                                         </div>
                                         <h4>Styling</h4>
                                         <p>Expert hair styling and finishing</p>
-                                        <span class="service-price">$25</span>
+                                        <span class="service-price">RM25</span>
                                         <span class="service-duration">30 min</span>
                                     </div>
                                 </div>
@@ -624,7 +714,7 @@ a, button {
                                         </div>
                                         <h4>Shave</h4>
                                         <p>Classic straight razor shave with hot towel</p>
-                                        <span class="service-price">$20</span>
+                                        <span class="service-price">RM20</span>
                                         <span class="service-duration">25 min</span>
                                     </div>
                                 </div>
@@ -635,7 +725,7 @@ a, button {
                                         </div>
                                         <h4>Beard Style</h4>
                                         <p>Professional beard grooming & shaping</p>
-                                        <span class="service-price">$15</span>
+                                        <span class="service-price">RM15</span>
                                         <span class="service-duration">20 min</span>
                                     </div>
                                 </div>
@@ -646,7 +736,7 @@ a, button {
                                         </div>
                                         <h4>Cut + Styling</h4>
                                         <p>Complete hair makeover package</p>
-                                        <span class="service-price">$63</span>
+                                        <span class="service-price">RM63</span>
                                         <span class="service-duration">60 min</span>
                                     </div>
                                 </div>
@@ -657,7 +747,7 @@ a, button {
                                         </div>
                                         <h4>Hair Color</h4>
                                         <p>Professional hair coloring service</p>
-                                        <span class="service-price">$65</span>
+                                        <span class="service-price">RM65</span>
                                         <span class="service-duration">90 min</span>
                                     </div>
                                 </div>
@@ -667,17 +757,18 @@ a, button {
                             </div>
                         </div>
 
+                    <!-- Step 2: Choose Barber -->
 <div class="form-step" id="step2">
     <h3>2. Choose Your Barber</h3>
     <div class="row">
         <div class="col-xl-4 col-lg-4 col-md-6 col-sm-6 mb-30">
-            <div class="barber-select-card" data-barber="Guy C. Pulido bks">
+            <div class="barber-select-card" data-barber="Ahmad bin Ismail">
                 <div class="barber-img-wrapper">
-                    <img src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80" alt="Guy C. Pulido">
+                    <img src="https://as1.ftcdn.net/v2/jpg/06/49/72/40/1000_F_649724078_jTrowyEQcL64ALY7TC0j6uBFRL1fxsUU.jpg" alt="Ahmad bin Ismail">
                     <div class="barber-badge">Master Barber</div>
                 </div>
                 <div class="barber-info">
-                    <h4>Guy C. Pulido bks</h4>
+                    <h4>Ahmad bin Ismail</h4>
                     <span class="barber-specialty">Master Barber</span>
                     <div class="barber-rating">
                         <i class="fas fa-star"></i>
@@ -687,18 +778,18 @@ a, button {
                         <i class="fas fa-star-half-alt"></i>
                         <span>4.8 (127)</span>
                     </div>
-                    <p class="barber-bio">15 years experience specializing in classic cuts and modern styles.</p>
+                    <p class="barber-bio">15 years of specialized experience in classic cuts and modern styles.</p>
                 </div>
             </div>
         </div>
         <div class="col-xl-4 col-lg-4 col-md-6 col-sm-6 mb-30">
-            <div class="barber-select-card" data-barber="Steve L. Nolan">
+            <div class="barber-select-card" data-barber="Mohd Faizal Abdullah">
                 <div class="barber-img-wrapper">
-                    <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80" alt="Steve L. Nolan">
+                    <img src="https://www.aipassportphotos.com/blog/wp-content/uploads/image-739.png" alt="Mohd Faizal Abdullah">
                     <div class="barber-badge">Color Expert</div>
                 </div>
                 <div class="barber-info">
-                    <h4>Steve L. Nolan</h4>
+                    <h4>Mohd Faizal Abdullah</h4>
                     <span class="barber-specialty">Color Expert</span>
                     <div class="barber-rating">
                         <i class="fas fa-star"></i>
@@ -713,12 +804,12 @@ a, button {
             </div>
         </div>
         <div class="col-xl-4 col-lg-4 col-md-6 col-sm-6 mb-30">
-            <div class="barber-select-card" data-barber="Edgar P. Mathis">
+            <div class="barber-select-card" data-barber="Syed Amirul bin Syed Hassan">
                 <div class="barber-img-wrapper">
-                    <img src="https://images.unsplash.com/photo-1500648767791-00dcc994a43e?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80" alt="Edgar P. Mathis">
+                    <img src="https://tse1.mm.bing.net/th/id/OIP.zuWM25NsyaoZdxRq56uemgHaHa?rs=1&pid=ImgDetMain" alt="Syed Amirul bin Syed Hassan">
                 </div>
                 <div class="barber-info">
-                    <h4>Edgar P. Mathis</h4>
+                    <h4>Syed Amirul bin Syed Hassan</h4>
                     <span class="barber-specialty">Master Barber</span>
                     <div class="barber-rating">
                         <i class="fas fa-star"></i>
@@ -738,7 +829,6 @@ a, button {
         <button type="button" class="btn header-btn next-step" onclick="nextStep()">Next Step</button>
     </div>
 </div>
-
                         <!-- Step 3: Select Date & Time -->
                         <div class="form-step" id="step3">
                             <h3>3. Select Date & Time</h3>
@@ -748,7 +838,7 @@ a, button {
                                         <label>Select Date</label>
                                         <div class="date-picker-container">
                                             <input type="date" id="datepicker" class="form-control" min="" required>
-                                            <i class="far fa-calendar-alt"></i>
+                                            
                                         </div>
                                     </div>
                                 </div>
@@ -815,17 +905,50 @@ a, button {
                             </div>
                             <div class="text-center btn-navigation">
                                 <button type="button" class="btn header-btn prev-step" onclick="prevStep()">Previous</button>
-                                <button type="button" class="btn header-btn next-step" onclick="nextStep()">Review & Confirm</button>
+                                <button type="button" class="btn header-btn next-step" onclick="nextStep()">Continue to Payment</button>
                             </div>
                         </div>
 
-                        <!-- Step 5: Review & Confirm -->
+                        <!-- Step 5: Payment Method -->
                         <div class="form-step" id="step5">
-                            <h3>5. Review Your Appointment</h3>
-                            <div class="summary-card">
+                            <h3>5. Choose Payment Method</h3>
+                            <div class="payment-options">
+                                <div class="payment-option" data-payment="cash">
+                                    <i class="fas fa-money-bill-wave"></i>
+                                    <h4>Cash Payment</h4>
+                                    <p>Pay in cash when you arrive</p>
+                                </div>
+                                <div class="payment-option" data-payment="qr">
+                                    <i class="fas fa-qrcode"></i>
+                                    <h4>QR Payment</h4>
+                                    <p>Scan QR code to pay online</p>
+                                </div>
+                            </div>
+
+                            <!-- QR Payment Details -->
+                            <div class="qr-code-container" id="qrPayment">
+                                <img src="..\img\QR.jpg" alt="QR Code for Payment">
+                                <h4>Scan this QR code to complete your payment</h4>
+                                <div class="payment-instructions">
+                                    <p>1. Open your mobile banking or e-wallet app</p>
+                                    <p>2. Select "Scan QR Code"</p>
+                                    <p>3. Point your camera at the QR code</p>
+                                    <p>4. Enter the amount of <strong id="qrAmount">RM25</strong></p>
+                                    <p>5. Complete the payment</p>
+                                </div>
+                            </div>
+
+                            <!-- Cash Payment Instructions -->
+                            <div class="cash-instructions" id="cashPayment">
+                                <h4>Cash Payment Instructions</h4>
+                                <p>Please bring exact cash amount of <strong id="cashAmount">RM25</strong> when you arrive for your appointment.</p>
+                                <p>Your appointment will be confirmed once payment is received.</p>
+                            </div>
+
+                            <div class="summary-card mt-30">
                                 <div class="summary-header">
                                     <h4>Appointment Summary</h4>
-                                    <span class="badge pending">Pending Confirmation</span>
+                                    <span class="badge pending">Pending Payment</span>
                                 </div>
                                 <div class="summary-body">
                                     <div class="summary-item">
@@ -850,25 +973,25 @@ a, button {
                                     </div>
                                     <div class="summary-item total">
                                         <span class="label">Total Price:</span>
-                                        <span class="value" id="summary-price">$0</span>
+                                        <span class="value" id="summary-price">RM0</span>
                                     </div>
                                 </div>
                             </div>
-                            <p class="text-center mt-30" style="color: #666;">You'll receive a confirmation email shortly. Please arrive 5 minutes before your appointment.</p>
+
                             <div class="text-center btn-navigation">
                                 <button type="button" class="btn header-btn prev-step" onclick="prevStep()">Previous</button>
-                                <button type="submit" class="btn header-btn confirm-btn">Confirm Appointment</button>
+                                <button type="button" class="btn header-btn confirm-btn" id="confirmPaymentBtn">Confirm Payment</button>
                             </div>
                         </div>
 
-                        <!-- Confirmation Step -->
+                        <!-- Step 6: Confirmation -->
                         <div class="form-step text-center" id="step6">
                             <div class="checkmark">
                                 <i class="fas fa-check"></i>
                             </div>
                             <h3>Appointment Confirmed!</h3>
-                            <p style="color: #666; margin-bottom: 30px;">Your appointment has been successfully booked. We've sent a confirmation to your email.</p>
-                            <div style="background: #f8f9fa; padding: 30px; border-radius: 10px; max-width: 500px; margin: 0 auto 30px;">
+                            <p style="color: #666; margin-bottom: 30px;">Your appointment has been successfully booked
+                                                            <div style="background: #f8f9fa; padding: 30px; border-radius: 10px; max-width: 500px; margin: 0 auto 30px;">
                                 <div style="margin-bottom: 15px;">
                                     <i class="far fa-calendar-check" style="color: #c9a761; margin-right: 10px;"></i>
                                     <span id="confirmation-date" style="font-weight: 600;">-</span>
@@ -877,11 +1000,16 @@ a, button {
                                     <i class="far fa-clock" style="color: #c9a761; margin-right: 10px;"></i>
                                     <span id="confirmation-time" style="font-weight: 600;">-</span>
                                 </div>
-                                <div>
+                                <div style="margin-bottom: 15px;">
                                     <i class="fas fa-user-tie" style="color: #c9a761; margin-right: 10px;"></i>
                                     <span id="confirmation-barber" style="font-weight: 600;">-</span>
                                 </div>
+                                <div>
+                                    <i class="fas fa-money-bill-wave" style="color: #c9a761; margin-right: 10px;"></i>
+                                    <span id="confirmation-payment" style="font-weight: 600;">-</span>
+                                </div>
                             </div>
+                            <p style="color: #666; margin-bottom: 30px;">You'll receive a confirmation email shortly. Please arrive 5 minutes before your appointment.</p>
                             <a href="#" class="btn header-btn" onclick="location.reload()">Book Another Appointment</a>
                         </div>
                     </form>
@@ -890,105 +1018,9 @@ a, button {
         </section>
         <!-- Appointment Area End -->
     </main>
-    <footer>
-        <!--? Footer Start-->
-        <div class="footer-area section-bg" data-background="assets/img/gallery/footer_bg.png">
-            <div class="container">
-                <div class="footer-top footer-padding">
-                    <div class="row d-flex justify-content-between">
-                        <div class="col-xl-3 col-lg-4 col-md-5 col-sm-8">
-                            <div class="single-footer-caption mb-50">
-                                <!-- logo -->
-                                <div class="footer-logo">
-                                    <a href="index.html"><img src="assets/img/logo/logo2_footer.png" alt=""></a>
-                                </div>
-                                <div class="footer-tittle">
-                                    <div class="footer-pera">
-                                        <p class="info1">Receive updates and latest news direct from Simply enter.</p>
-                                    </div>
-                                </div>
-                                <div class="footer-number">
-                                    <h4><span>+564 </span>7885 3222</h4>
-                                    <p>youremail@gmail.com</p>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-xl-2 col-lg-2 col-md-3 col-sm-5">
-                            <div class="single-footer-caption mb-50">
-                                <div class="footer-tittle">
-                                    <h4>Location </h4>
-                                    <ul>
-                                        <li><a href="#">Advanced</a></li>
-                                        <li><a href="#"> Management</a></li>
-                                        <li><a href="#">Corporate</a></li>
-                                        <li><a href="#">Customer</a></li>
-                                        <li><a href="#">Information</a></li>
-                                    </ul>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-xl-2 col-lg-2 col-md-3 col-sm-5">
-                            <div class="single-footer-caption mb-50">
-                                <div class="footer-tittle">
-                                    <h4>Explore</h4>
-                                    <ul>
-                                        <li><a href="#">Cookies</a></li>
-                                        <li><a href="#">About</a></li>
-                                        <li><a href="#">Privacy Policy</a></li>
-                                        <li><a href="#">Proparties</a></li>
-                                        <li><a href="#">Licenses</a></li>
-                                    </ul>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-xl-4 col-lg-4 col-md-6 col-sm-8">
-                            <div class="single-footer-caption mb-50">
-                                <div class="footer-tittle">
-                                    <h4>Location</h4>
-                                    <div class="footer-pera">
-                                        <p class="info1">Subscribe now to get daily updates</p>
-                                    </div>
-                                </div>
-                                <!-- Form -->
-                                <div class="footer-form">
-                                    <div id="mc_embed_signup">
-                                        <form target="_blank" action="https://spondonit.us12.list-manage.com/subscribe/post?u=1462626880ade1ac87bd9c93a&amp;id=92a4423d01" method="get" class="subscribe_form relative mail_part" novalidate="true">
-                                            <input type="email" name="EMAIL" id="newsletter-form-email" placeholder=" Email Address " class="placeholder hide-on-focus" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Your email address'">
-                                            <div class="form-icon">
-                                                <button type="submit" name="submit" id="newsletter-submit" class="email_icon newsletter-submit button-contactForm">Send</button>
-                                            </div>
-                                            <div class="mt-10 info"></div>
-                                        </form>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="footer-bottom">
-                    <div class="row d-flex justify-content-between align-items-center">
-                        <div class="col-xl-9 col-lg-8">
-                            <div class="footer-copy-right">
-                                <p><!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
-  Copyright &copy;<script>document.write(new Date().getFullYear());</script> All rights reserved | This template is made with <i class="fa fa-heart" aria-hidden="true"></i> by <a href="https://colorlib.com" target="_blank">Colorlib</a>
-  <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. --></p>
-                            </div>
-                        </div>
-                        <div class="col-xl-3 col-lg-4">
-                            <!-- Footer Social -->
-                            <div class="footer-social f-right">
-                                <a href="#"><i class="fab fa-twitter"></i></a>
-                                <a href="https://www.facebook.com/sai4ull"><i class="fab fa-facebook-f"></i></a>
-                                <a href="#"><i class="fas fa-globe"></i></a>
-                                <a href="#"><i class="fab fa-instagram"></i></a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <!-- Footer End-->
-    </footer>
+  <?php
+include "./footer.php"
+?>
     <!-- Scroll Up -->
     <div id="back-top" >
         <a title="Go to Top" href="#"> <i class="fas fa-level-up-alt"></i></a>
@@ -1035,303 +1067,325 @@ a, button {
     <script src="./assets/js/main.js"></script>
 
     <!-- Booking Script -->
-    <!-- Booking Script -->
-<script>
-    // Booking state
-    let currentStep = 1;
-    let maxStepReached = 1; // Track the furthest step completed
-    let bookingData = {
-        service: null,
-        price: 0,
-        duration: 0,
-        barber: null,
-        date: null,
-        time: null,
-        firstName: '',
-        lastName: '',
-        email: '',
-        phone: '',
-        requests: ''
-    };
+    <script>
+        // Booking state
+        let currentStep = 1;
+        let maxStepReached = 1;
+        let bookingData = {
+            service: null,
+            price: 0,
+            duration: 0,
+            barber: null,
+            date: null,
+            time: null,
+            firstName: '',
+            lastName: '',
+            email: '',
+            phone: '',
+            requests: '',
+            paymentMethod: null
+        };
 
-// Initialize date picker and setup
-    document.addEventListener('DOMContentLoaded', function() {
-        const dateInput = document.getElementById('datepicker');
-        const today = new Date().toISOString().split('T')[0];
-        dateInput.min = today;
+        // Initialize date picker and setup
+        document.addEventListener('DOMContentLoaded', function() {
+            const dateInput = document.getElementById('datepicker');
+            const today = new Date().toISOString().split('T')[0];
+            dateInput.min = today;
 
-        // Make progress steps clickable
-        document.querySelectorAll('.progress-step').forEach((step, index) => {
-            step.addEventListener('click', function() {
-                const stepNumber = index + 1;
-                if (stepNumber <= maxStepReached) { // Only allow going to previously reached steps
-                    currentStep = stepNumber;
-                    showStep(currentStep);
-                    restoreStepData(currentStep);
-                    updateProgress();
+            // Make progress steps clickable
+            document.querySelectorAll('.progress-step').forEach((step, index) => {
+                step.addEventListener('click', function() {
+                    const stepNumber = index + 1;
+                    if (stepNumber <= maxStepReached) {
+                        currentStep = stepNumber;
+                        showStep(currentStep);
+                        restoreStepData(currentStep);
+                        updateProgress();
+                    }
+                });
+            });
+
+            // Initialize form field listeners
+            document.getElementById('firstName').addEventListener('input', (e) => {
+                bookingData.firstName = e.target.value;
+            });
+            document.getElementById('lastName').addEventListener('input', (e) => {
+                bookingData.lastName = e.target.value;
+            });
+            document.getElementById('email').addEventListener('input', (e) => {
+                bookingData.email = e.target.value;
+            });
+            document.getElementById('phone').addEventListener('input', (e) => {
+                bookingData.phone = e.target.value;
+            });
+            document.getElementById('requests').addEventListener('input', (e) => {
+                bookingData.requests = e.target.value;
+            });
+
+            // Payment option selection
+            document.querySelectorAll('.payment-option').forEach(option => {
+                option.addEventListener('click', function() {
+                    document.querySelectorAll('.payment-option').forEach(o => o.classList.remove('selected'));
+                    this.classList.add('selected');
+                    bookingData.paymentMethod = this.dataset.payment;
+                    
+                    // Show appropriate payment instructions
+                    if (bookingData.paymentMethod === 'qr') {
+                        document.getElementById('qrPayment').style.display = 'block';
+                        document.getElementById('cashPayment').style.display = 'none';
+                        document.getElementById('qrAmount').textContent = `RM${bookingData.price}`;
+                    } else {
+                        document.getElementById('qrPayment').style.display = 'none';
+                        document.getElementById('cashPayment').style.display = 'block';
+                        document.getElementById('cashAmount').textContent = `RM${bookingData.price}`;
+                    }
+                });
+            });
+
+            // Confirm payment button
+            document.getElementById('confirmPaymentBtn').addEventListener('click', function() {
+                if (!bookingData.paymentMethod) {
+                    alert('Please select a payment method');
+                    return;
                 }
+                nextStep();
             });
         });
 
-        // Initialize form field listeners
-        document.getElementById('firstName').addEventListener('input', (e) => {
-            bookingData.firstName = e.target.value;
+        // Service selection
+        document.querySelectorAll('.service-select-card').forEach(card => {
+            card.addEventListener('click', function() {
+                document.querySelectorAll('.service-select-card').forEach(c => c.classList.remove('selected'));
+                this.classList.add('selected');
+                bookingData.service = this.querySelector('h4').textContent;
+                bookingData.price = parseFloat(this.dataset.price);
+                bookingData.duration = parseInt(this.dataset.duration);
+            });
         });
-        document.getElementById('lastName').addEventListener('input', (e) => {
-            bookingData.lastName = e.target.value;
+
+        // Barber selection
+        document.querySelectorAll('.barber-select-card').forEach(card => {
+            card.addEventListener('click', function() {
+                document.querySelectorAll('.barber-select-card').forEach(c => c.classList.remove('selected'));
+                this.classList.add('selected');
+                bookingData.barber = this.dataset.barber;
+            });
         });
-        document.getElementById('email').addEventListener('input', (e) => {
-            bookingData.email = e.target.value;
+
+        // Time slot selection
+        document.querySelectorAll('.time-slot:not(.booked)').forEach(slot => {
+            slot.addEventListener('click', function() {
+                document.querySelectorAll('.time-slot').forEach(s => s.classList.remove('selected'));
+                this.classList.add('selected');
+                bookingData.time = this.dataset.time;
+            });
         });
-        document.getElementById('phone').addEventListener('input', (e) => {
-            bookingData.phone = e.target.value;
+
+        // Date selection
+        document.getElementById('datepicker').addEventListener('change', function() {
+            bookingData.date = this.value;
         });
-        document.getElementById('requests').addEventListener('input', (e) => {
-            bookingData.requests = e.target.value;
-        });
-    });
 
-    // Service selection - updates bookingData
-    document.querySelectorAll('.service-select-card').forEach(card => {
-        card.addEventListener('click', function() {
-            document.querySelectorAll('.service-select-card').forEach(c => c.classList.remove('selected'));
-            this.classList.add('selected');
-            bookingData.service = this.querySelector('h4').textContent;
-            bookingData.price = parseFloat(this.dataset.price);
-            bookingData.duration = parseInt(this.dataset.duration);
-        });
-    });
-
-    // Barber selection - updates bookingData
-    document.querySelectorAll('.barber-select-card').forEach(card => {
-        card.addEventListener('click', function() {
-            document.querySelectorAll('.barber-select-card').forEach(c => c.classList.remove('selected'));
-            this.classList.add('selected');
-            bookingData.barber = this.dataset.barber;
-        });
-    });
-
-    // Time slot selection - updates bookingData
-    document.querySelectorAll('.time-slot:not(.booked)').forEach(slot => {
-        slot.addEventListener('click', function() {
-            document.querySelectorAll('.time-slot').forEach(s => s.classList.remove('selected'));
-            this.classList.add('selected');
-            bookingData.time = this.dataset.time;
-        });
-    });
-
-    // Date selection - updates bookingData
-    document.getElementById('datepicker').addEventListener('change', function() {
-        bookingData.date = this.value;
-    });
-
-    // Navigation functions
-    function nextStep() {
-        if (!validateStep()) return;
-        
-        if (currentStep < 5) {
-            currentStep++;
-            if (currentStep > maxStepReached) {
-                maxStepReached = currentStep;
-            }
-            showStep(currentStep);
-            updateProgress();
-        }
-    }
-
-    function prevStep() {
-        if (currentStep > 1) {
-            currentStep--;
-            showStep(currentStep);
-            restoreStepData(currentStep);
-            updateProgress();
-        }
-    }
-
-
-    function showStep(step) {
-        // Hide all steps
-        document.querySelectorAll('.form-step').forEach(s => s.classList.remove('active'));
-        
-        // Show current step
-        document.getElementById(`step${step}`).classList.add('active');
-        
-        // Update progress
-        updateProgress();
-        
-        // Update summary if on review step
-        if (step === 5) {
-            updateSummary();
-        }
-    }
-
-    // Restore saved data when returning to a step
-    function restoreStepData(step) {
-        switch(step) {
-            case 1:
-                // Restore service selection
-                if (bookingData.service) {
-                    document.querySelectorAll('.service-select-card').forEach(card => {
-                        if (card.querySelector('h4').textContent === bookingData.service) {
-                            card.classList.add('selected');
-                        }
-                    });
-                }
-                break;
-            case 2:
-                // Restore barber selection
-                if (bookingData.barber) {
-                    document.querySelectorAll('.barber-select-card').forEach(card => {
-                        if (card.dataset.barber === bookingData.barber) {
-                            card.classList.add('selected');
-                        }
-                    });
-                }
-                break;
-            case 3:
-                // Restore date and time
-                if (bookingData.date) {
-                    document.getElementById('datepicker').value = bookingData.date;
-                }
-                if (bookingData.time) {
-                    document.querySelectorAll('.time-slot').forEach(slot => {
-                        if (slot.dataset.time === bookingData.time) {
-                            slot.classList.add('selected');
-                        }
-                    });
-                }
-                break;
-            case 4:
-                // Restore personal info
-                document.getElementById('firstName').value = bookingData.firstName;
-                document.getElementById('lastName').value = bookingData.lastName;
-                document.getElementById('email').value = bookingData.email;
-                document.getElementById('phone').value = bookingData.phone;
-                document.getElementById('requests').value = bookingData.requests;
-                break;
-        }
-    }
-
-     function updateProgress() {
-        // Update progress bar based on max step reached
-        const progressBar = document.getElementById('progressBar');
-        progressBar.style.width = `${(maxStepReached / 5) * 100}%`;
-        
-        // Update progress steps
-        for (let i = 1; i <= 5; i++) {
-            const stepElement = document.getElementById(`progressStep${i}`);
+        // Navigation functions
+        function nextStep() {
+            if (!validateStep()) return;
             
-            // Clear all classes first
-            stepElement.classList.remove('active', 'completed');
-            
-            if (i < currentStep) {
-                // Steps before current are completed
-                stepElement.classList.add('completed');
-            } else if (i === currentStep) {
-                // Current step is active
-                stepElement.classList.add('active');
-            } else if (i < maxStepReached) {
-                // Steps after current but before max reached are completed
-                stepElement.classList.add('completed');
-            }
-            // Steps after max reached remain inactive
-        }
-    }
-
-
-    function validateStep() {
-        switch (currentStep) {
-            case 1:
-                if (!bookingData.service) {
-                    alert('Please select a service');
-                    return false;
+            if (currentStep < 6) {
+                currentStep++;
+                if (currentStep > maxStepReached) {
+                    maxStepReached = currentStep;
                 }
-                break;
-            case 2:
-                if (!bookingData.barber) {
-                    alert('Please select a barber');
-                    return false;
-                }
-                break;
-            case 3:
-                if (!bookingData.date || !bookingData.time) {
-                    alert('Please select both date and time');
-                    return false;
-                }
-                break;
-            case 4:
-                const firstName = document.getElementById('firstName').value;
-                const lastName = document.getElementById('lastName').value;
-                const email = document.getElementById('email').value;
-                const phone = document.getElementById('phone').value;
+                showStep(currentStep);
+                updateProgress();
                 
-                if (!firstName || !lastName || !email || !phone) {
-                    alert('Please fill in all required fields');
-                    return false;
+                // Update summary when moving to payment step
+                if (currentStep === 5) {
+                    updateSummary();
                 }
-                // Save form data in case user goes back
-                bookingData.firstName = firstName;
-                bookingData.lastName = lastName;
-                bookingData.email = email;
-                bookingData.phone = phone;
-                bookingData.requests = document.getElementById('requests').value;
-                break;
+            }
         }
-        return true;
-    }
 
-    function updateSummary() {
-        // Format date
-        const date = bookingData.date ? new Date(bookingData.date).toLocaleDateString('en-US', {
-            weekday: 'long',
-            year: 'numeric',
-            month: 'long',
-            day: 'numeric'
-        }) : '-';
-        
-        // Update summary fields
-        document.getElementById('summary-service').textContent = bookingData.service || '-';
-        document.getElementById('summary-barber').textContent = bookingData.barber || '-';
-        document.getElementById('summary-date').textContent = date;
-        document.getElementById('summary-time').textContent = bookingData.time || '-';
-        document.getElementById('summary-duration').textContent = bookingData.duration ? `${bookingData.duration} minutes` : '-';
-        document.getElementById('summary-price').textContent = bookingData.price ? `$${bookingData.price}` : '-';
-    }
+        function prevStep() {
+            if (currentStep > 1) {
+                currentStep--;
+                showStep(currentStep);
+                restoreStepData(currentStep);
+                updateProgress();
+            }
+        }
 
-    // Form submission
-    document.getElementById('appointmentForm').addEventListener('submit', function(e) {
-        e.preventDefault();
-        
-        // Update confirmation details
-        document.getElementById('confirmation-date').textContent = new Date(bookingData.date).toLocaleDateString('en-US', {
-            weekday: 'long',
-            month: 'long',
-            day: 'numeric'
-        });
-        document.getElementById('confirmation-time').textContent = bookingData.time;
-        document.getElementById('confirmation-barber').textContent = `with ${bookingData.barber}`;
-        
-        // Show confirmation
-        currentStep = 6;
-        showStep(6);
-        
-        // In a real app, you would send data to server here
-        console.log('Booking confirmed:', bookingData);
-    });
+        function showStep(step) {
+            document.querySelectorAll('.form-step').forEach(s => s.classList.remove('active'));
+            document.getElementById(`step${step}`).classList.add('active');
+            updateProgress();
+            
+            if (step === 5) {
+                updateSummary();
+            } else if (step === 6) {
+                updateConfirmation();
+            }
+        }
 
-    // Ensure barber cards are visible on page load
-    $(document).ready(function() {
-        $('.team-active').removeClass('owl-carousel owl-theme owl-loaded owl-drag');
-        $('.barber-select-card').parent().css({
-            'display': 'block',
-            'opacity': '1',
-            'visibility': 'visible'
+        function restoreStepData(step) {
+            switch(step) {
+                case 1:
+                    if (bookingData.service) {
+                        document.querySelectorAll('.service-select-card').forEach(card => {
+                            if (card.querySelector('h4').textContent === bookingData.service) {
+                                card.classList.add('selected');
+                            }
+                        });
+                    }
+                    break;
+                case 2:
+                    if (bookingData.barber) {
+                        document.querySelectorAll('.barber-select-card').forEach(card => {
+                            if (card.dataset.barber === bookingData.barber) {
+                                card.classList.add('selected');
+                            }
+                        });
+                    }
+                    break;
+                case 3:
+                    if (bookingData.date) {
+                        document.getElementById('datepicker').value = bookingData.date;
+                    }
+                    if (bookingData.time) {
+                        document.querySelectorAll('.time-slot').forEach(slot => {
+                            if (slot.dataset.time === bookingData.time) {
+                                slot.classList.add('selected');
+                            }
+                        });
+                    }
+                    break;
+                case 4:
+                    document.getElementById('firstName').value = bookingData.firstName;
+                    document.getElementById('lastName').value = bookingData.lastName;
+                    document.getElementById('email').value = bookingData.email;
+                    document.getElementById('phone').value = bookingData.phone;
+                    document.getElementById('requests').value = bookingData.requests;
+                    break;
+                case 5:
+                    if (bookingData.paymentMethod) {
+                        document.querySelector(`.payment-option[data-payment="${bookingData.paymentMethod}"]`).classList.add('selected');
+                        if (bookingData.paymentMethod === 'qr') {
+                            document.getElementById('qrPayment').style.display = 'block';
+                            document.getElementById('qrAmount').textContent = `RM${bookingData.price}`;
+                        } else {
+                            document.getElementById('cashPayment').style.display = 'block';
+                            document.getElementById('cashAmount').textContent = `RM${bookingData.price}`;
+                        }
+                    }
+                    break;
+            }
+        }
+
+        function updateProgress() {
+            const progressBar = document.getElementById('progressBar');
+            progressBar.style.width = `${(maxStepReached / 6) * 100}%`;
+            
+            for (let i = 1; i <= 6; i++) {
+                const stepElement = document.getElementById(`progressStep${i}`);
+                stepElement.classList.remove('active', 'completed');
+                
+                if (i < currentStep) {
+                    stepElement.classList.add('completed');
+                } else if (i === currentStep) {
+                    stepElement.classList.add('active');
+                } else if (i < maxStepReached) {
+                    stepElement.classList.add('completed');
+                }
+            }
+        }
+
+        function validateStep() {
+            switch (currentStep) {
+                case 1:
+                    if (!bookingData.service) {
+                        alert('Please select a service');
+                        return false;
+                    }
+                    break;
+                case 2:
+                    if (!bookingData.barber) {
+                        alert('Please select a barber');
+                        return false;
+                    }
+                    break;
+                case 3:
+                    if (!bookingData.date || !bookingData.time) {
+                        alert('Please select both date and time');
+                        return false;
+                    }
+                    break;
+                case 4:
+                    const firstName = document.getElementById('firstName').value;
+                    const lastName = document.getElementById('lastName').value;
+                    const email = document.getElementById('email').value;
+                    const phone = document.getElementById('phone').value;
+                    
+                    if (!firstName || !lastName || !email || !phone) {
+                        alert('Please fill in all required fields');
+                        return false;
+                    }
+                    bookingData.firstName = firstName;
+                    bookingData.lastName = lastName;
+                    bookingData.email = email;
+                    bookingData.phone = phone;
+                    bookingData.requests = document.getElementById('requests').value;
+                    break;
+                case 5:
+                    if (!bookingData.paymentMethod) {
+                        alert('Please select a payment method');
+                        return false;
+                    }
+                    break;
+            }
+            return true;
+        }
+
+        function updateSummary() {
+            const date = bookingData.date ? new Date(bookingData.date).toLocaleDateString('en-US', {
+                weekday: 'long',
+                year: 'numeric',
+                month: 'long',
+                day: 'numeric'
+            }) : '-';
+            
+            document.getElementById('summary-service').textContent = bookingData.service || '-';
+            document.getElementById('summary-barber').textContent = bookingData.barber || '-';
+            document.getElementById('summary-date').textContent = date;
+            document.getElementById('summary-time').textContent = bookingData.time || '-';
+            document.getElementById('summary-duration').textContent = bookingData.duration ? `${bookingData.duration} minutes` : '-';
+            document.getElementById('summary-price').textContent = bookingData.price ? `RM${bookingData.price}` : '-';
+        }
+
+        function updateConfirmation() {
+            document.getElementById('confirmation-date').textContent = new Date(bookingData.date).toLocaleDateString('en-US', {
+                weekday: 'long',
+                month: 'long',
+                day: 'numeric'
+            });
+            document.getElementById('confirmation-time').textContent = bookingData.time;
+            document.getElementById('confirmation-barber').textContent = `with ${bookingData.barber}`;
+            document.getElementById('confirmation-payment').textContent = bookingData.paymentMethod === 'qr' ? 'QR Payment' : 'Cash Payment';
+            
+            // In a real app, you would send data to server here
+            console.log('Booking confirmed:', bookingData);
+        }
+
+        // Ensure barber cards are visible on page load
+        $(document).ready(function() {
+            $('.team-active').removeClass('owl-carousel owl-theme owl-loaded owl-drag');
+            $('.barber-select-card').parent().css({
+                'display': 'block',
+                'opacity': '1',
+                'visibility': 'visible'
+            });
+            $('.barber-img-wrapper img').on('error', function() {
+                $(this).attr('src', 'assets/img/team/team_1.png');
+            });
         });
-        $('.barber-img-wrapper img').on('error', function() {
-            $(this).attr('src', 'assets/img/team/team_1.png');
-        });
-    });
-</script>
-    
+    </script>
 </body>
 </html>

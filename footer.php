@@ -3,12 +3,13 @@
         <div class="footer-grid">
             <!-- Brand Column -->
             <div class="footer-brand">
-                <img src="assets/img/logo/logo2_footer.png" alt="Apitz Barber" class="footer-logo">
+                <img src="../img/logohead.png" alt="Apitz Barber" style="height: 100px;" class="footer-logo">
                 <p class="footer-description">
                     APITZ BARBER - Where precision meets tradition. Our master barbers provide exceptional grooming 
                     services using both modern techniques and classic barbering artistry. Established in 2010, we take 
                     pride in every cut, shave, and style.
                 </p>
+               
                 <div class="footer-credentials">
                     <div class="credential-item">
                         <i class="fas fa-cut"></i>
@@ -50,10 +51,10 @@
                         <a href="https://wa.me/60174584618" class="social-icon whatsapp" target="_blank" title="WhatsApp">
                             <i class="fab fa-whatsapp"></i>
                         </a>
-                        <a href="https://www.instagram.com/apitzbarber" class="social-icon instagram" target="_blank" title="Instagram">
+                        <a href="https://www.instagram.com/apitzbarbershop/" class="social-icon instagram" target="_blank" title="Instagram">
                             <i class="fab fa-instagram"></i>
                         </a>
-                        <a href="https://www.facebook.com/apitzbarber" class="social-icon facebook" target="_blank" title="Facebook">
+                        <a href="https://www.facebook.com/apitzbarbershopacademy/" class="social-icon facebook" target="_blank" title="Facebook">
                             <i class="fab fa-facebook-f"></i>
                         </a>
                     </div>
