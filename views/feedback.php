@@ -1,3 +1,9 @@
+<?php
+session_start();
+require_once "../global/session_check.php";
+$user = getAuthInfo($_SESSION['staff_id']);
+?>
+
 <!DOCTYPE html>
 <html lang="en">
   <head>
